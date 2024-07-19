@@ -1,2 +1,1 @@
-# college-management-system
-The aim of this project is to provide a complete management system that effectively manages staff and student administrative responsibilities. The system's goal is to offer an intuitive user interface through which a range of tasks can be carried out, such as showcasing data about faculty and students, incorporating or removing them from the database, controlling staff pay, monitoring student enrollment across semesters, locating students who have unpaid fees, and setting up automated reminders for fee payments.
+
