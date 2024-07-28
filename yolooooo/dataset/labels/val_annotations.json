@@ -1,0 +1,46 @@
+{
+    "images": [],
+    "annotations": [],
+    "categories": [
+        {
+            "id": 0,
+            "name": "License_Number"
+        },
+        {
+            "id": 1,
+            "name": "Name"
+        },
+        {
+            "id": 2,
+            "name": "Blood_Group"
+        },
+        {
+            "id": 3,
+            "name": "Address"
+        },
+        {
+            "id": 4,
+            "name": "DOB"
+        },
+        {
+            "id": 5,
+            "name": "Father_Name"
+        },
+        {
+            "id": 6,
+            "name": "Citizenship_Number"
+        },
+        {
+            "id": 7,
+            "name": "Phone_Number"
+        },
+        {
+            "id": 8,
+            "name": "License_Category"
+        },
+        {
+            "id": 9,
+            "name": "License_Type"
+        }
+    ]
+}

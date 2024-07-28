@@ -1,0 +1,5 @@
+search for n names in chat gpt
+create a csv out of it
+run the license_generator.py
+run the make_annotations.py
+run the visualize_annotations.py
