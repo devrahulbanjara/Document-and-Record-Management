@@ -6,16 +6,16 @@ classes = ["License_Number", "Name", "Blood_Group", "Address", "DOB", "Father_Na
 
 # Define the top-left positions for each field along with their widths and heights, shifted 5 pixels to the left
 fields = {
-    "License_Number": ((114, 101), 160, 25),  # 119 - 5
-    "Name": ((348, 100), 226, 25),  # 353 - 5
-    "Blood_Group": ((93, 129), 70, 25),  # 98 - 5
-    "Address": ((378, 129), 200, 90),  # 383 - 5
-    "DOB": ((355, 217), 226, 25),  # 360 - 5
-    "Father_Name": ((384, 248), 190, 25),  # 389 - 5
-    "Citizenship_Number": ((425, 278), 160, 25),  # 430 - 5
-    "Phone_Number": ((390, 337), 190, 25),  # 395 - 5
-    "License_Category": ((675, 283), 70, 25),  # 680 - 5
-    "License_Type": ((275, 64), 228, 24)  # 280 - 5
+    "License_Number": ((114, 101), 160, 25),
+    "Name": ((348, 100), 226, 25),
+    "Blood_Group": ((93, 129), 70, 25),
+    "Address": ((378, 129), 200, 90),
+    "DOB": ((355, 217), 226, 25),
+    "Father_Name": ((384, 248), 190, 25),
+    "Citizenship_Number": ((425, 278), 160, 25),
+    "Phone_Number": ((390, 337), 190, 25),
+    "License_Category": ((675, 283), 70, 25),
+    "License_Type": ((275, 64), 228, 24)
 }
 
 # Load the template image to get the image dimensions
