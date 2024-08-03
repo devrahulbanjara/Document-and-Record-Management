@@ -16,20 +16,16 @@ colors = {
     "License_Type": (0, 0, 128)
 }
 
-# Paths to image directories and JSON files
-train_image_folder = r"C:\Users\drenergydrink\Desktop\Document-and-Record-Management\train_images"
-val_image_folder = r"C:\Users\drenergydrink\Desktop\Document-and-Record-Management\val_images"
-train_json_path = os.path.join(train_image_folder, "output_train_coco.json")
-val_json_path = os.path.join(val_image_folder, "output_val_coco.json")
+# Paths to image directory and JSON file
+image_folder = r"C:\Users\drenergydrink\Desktop\Document-and-Record-Management\COCO\images"
+json_path = r"C:\Users\drenergydrink\Desktop\Document-and-Record-Management\COCO\annotations\annotations_coco.json"
 
 # Create a new folder for visualized annotations
-visualized_folder = r"C:\Users\drenergydrink\Desktop\Document-and-Record-Management\annotations_visualized"
-train_visualized_folder = os.path.join(visualized_folder, "train_visualized")
-val_visualized_folder = os.path.join(visualized_folder, "val_visualized")
+visualized_folder = r"C:\Users\drenergydrink\Desktop\Document-and-Record-Management\COCO\visualized_images"
+license_visualized_folder = os.path.join(visualized_folder, "license_visualized")
 
-# Ensure the directories exist
-os.makedirs(train_visualized_folder, exist_ok=True)
-os.makedirs(val_visualized_folder, exist_ok=True)
+# Ensure the directory exists
+os.makedirs(license_visualized_folder, exist_ok=True)
 
 # Function to draw bounding boxes on images
 def draw_bounding_boxes(image_folder, json_path, output_folder):
@@ -58,8 +54,7 @@ def draw_bounding_boxes(image_folder, json_path, output_folder):
         output_image_path = os.path.join(output_folder, img["file_name"])
         cv2.imwrite(output_image_path, image)
 
-# Visualize train and validation sets
-draw_bounding_boxes(train_image_folder, train_json_path, train_visualized_folder)
-draw_bounding_boxes(val_image_folder, val_json_path, val_visualized_folder)
+# Visualize the images
+draw_bounding_boxes(image_folder, json_path, license_visualized_folder)
 
 print("Bounding boxes drawn and images saved.")
