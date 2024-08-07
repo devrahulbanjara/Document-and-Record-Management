@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 10
+names: ['Address', 'Blood_Group', 'Citizenship_Number', 'DOB', 'Father_Name', 'License_Category', 'License_Number', 'License_Type', 'Name', 'Phone_Number']
+
+roboflow:
+  workspace: rahul-auzyi
+  project: doc-rec-ylggk
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rahul-auzyi/doc-rec-ylggk/dataset/3
