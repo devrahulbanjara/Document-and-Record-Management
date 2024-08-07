@@ -17,11 +17,11 @@ annotation_colors = {
 }
 
 # Directory containing images
-image_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License_generator_2/output_images"
+image_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/output_images"
 # Directory containing YOLO annotations
-annotations_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License_generator_2/annotations"
+annotations_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/annotations"
 # Directory to save annotated images
-output_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License_generator_2/annotated_images"
+output_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/annotated_images"
 os.makedirs(output_dir, exist_ok=True)
 
 # Function to convert YOLO format to pixel coordinates

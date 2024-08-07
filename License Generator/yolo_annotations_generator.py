@@ -1,6 +1,5 @@
 import os
 from PIL import Image
-import pandas as pd
 
 # Define the annotation coordinates (top-left and bottom-right)
 annotations = {
@@ -11,25 +10,29 @@ annotations = {
     "dob": ((390, 354), (645, 394)),
     "father_name": ((390, 398), (793, 486)),
     "citizenship_number": ((387, 444), (789, 484)),
-    "contact_number": ((388, 534), (789, 481)),
+    "contact_number": ((388, 532), (683, 569)),  # Correct coordinates
     "license_category": ((816, 439), (1032, 485)),
     "blood_group": ((56, 192), (239, 225)),
 }
 
 # Directory containing images
-image_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License_generator_2/output_images"
+image_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/output_images"
 
 # Directory to save YOLO annotations
-annotations_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License_generator_2/annotations"
+annotations_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/annotations"
 os.makedirs(annotations_dir, exist_ok=True)
 
 # Function to convert coordinates to YOLO format
 def convert_to_yolo(x1, y1, x2, y2, img_width, img_height):
-    x_center = (x1 + x2) / 2 / img_width
-    y_center = (y1 + y2) / 2 / img_height
-    width = (x2 - x1) / img_width
-    height = (y2 - y1) / img_height
-    return x_center, y_center, width, height
+    x_center = (x1 + x2) / 2
+    y_center = (y1 + y2) / 2
+    width = x2 - x1
+    height = y2 - y1
+    x_center_normalized = x_center / img_width
+    y_center_normalized = y_center / img_height
+    width_normalized = width / img_width
+    height_normalized = height / img_height
+    return x_center_normalized, y_center_normalized, width_normalized, height_normalized
 
 # Generate YOLO annotations
 for i in range(400):  # Assuming 400 images

@@ -3,11 +3,11 @@ val: /mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/YOLOv8/da
 test: /mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/YOLOv8/data/test
 
 nc: 10
-names: ['Address', 'Blood_Group', 'Citizenship_Number', 'DOB', 'Father_Name', 'License_Category', 'License_Number', 'License_Type', 'Name', 'Phone_Number']
+names: ['address', 'blood_group', 'citizenship_number', 'contact_number', 'dob', 'document_type', 'father_name', 'license_category', 'license_number', 'name']
 
 roboflow:
   workspace: rahul-auzyi
-  project: doc-rec-ylggk
-  version: 3
+  project: new-template-agbbm
+  version: 7
   license: CC BY 4.0
-  url: https://universe.roboflow.com/rahul-auzyi/doc-rec-ylggk/dataset/3
+  url: https://universe.roboflow.com/rahul-auzyi/new-template-agbbm/dataset/7
