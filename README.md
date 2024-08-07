@@ -54,29 +54,35 @@ To get started with the DRMS, follow these steps:
 
 ## Usage
   
-  **Digitize Documents**
+**Digitize Documents**
 * Upload physical documents for OCR processing.
 * Monitor the progress through the web interface.
+
   
-  **Classify Documents**
+**Classify Documents**
 * Review automatically classified documents.
 * Adjust classification models as needed.
+
   
-  **Store Documents**
+**Store Documents**
 * Manage document storage with encrypted cloud solutions.
 * Ensure data security and compliance.
+
    
-  **Retrieve Documents**
+**Retrieve Documents**
 * Use the search engine to find documents quickly.
 * Apply filters and advanced search options.
+
   
-  **Manage Access**
+**Manage Access**
 * Configure user roles and permissions.
 * Track and audit access and modifications.
+
   
-  **Version Control**
+**Version Control**
 * View document history and revisions.
 * Revert to previous versions if needed.
+
 
 ## Contributing
   Contributions are welcome! Please follow these guidelines:
