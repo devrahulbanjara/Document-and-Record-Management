@@ -52,7 +52,8 @@ To get started with the DRMS, follow these steps:
    ```bash
    python main.py
 
-  ### Usage
+## Usage
+  
   **Digitize Documents**
 * Upload physical documents for OCR processing.
 * Monitor the progress through the web interface.
@@ -77,17 +78,17 @@ To get started with the DRMS, follow these steps:
 * View document history and revisions.
 * Revert to previous versions if needed.
 
-  ### Contributing
+## Contributing
   Contributions are welcome! Please follow these guidelines:
    1. Fork the repository.
    2. Create a new branch for your feature or bug fix.
    3. Commit your changes with descriptive messages.
    4. Submit a pull request.
 
-   ### License
+## License
   This project is licensed under the MIT License. See the LICENSE file for details.
 
-   ### Contact
+## Contact
   For questions or feedback, please contact rdbanjara07@gmail.com.
 
   
