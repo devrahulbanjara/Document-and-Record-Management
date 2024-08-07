@@ -1,6 +1,6 @@
-train: ../train/images
-val: ../valid/images
-test: ../test/images
+train: /mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/YOLOv8/data/train
+val: /mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/YOLOv8/data/valid
+test: /mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/YOLOv8/data/test
 
 nc: 10
 names: ['Address', 'Blood_Group', 'Citizenship_Number', 'DOB', 'Father_Name', 'License_Category', 'License_Number', 'License_Type', 'Name', 'Phone_Number']
