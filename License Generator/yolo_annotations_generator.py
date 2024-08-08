@@ -8,7 +8,7 @@ annotations = {
     "name": ((390, 188), (804, 224)),
     "address": ((392, 231), (835, 314)),
     "dob": ((390, 354), (645, 394)),
-    "father_name": ((390, 398), (793, 486)),
+    "father_name": ((390, 398), (805, 442)),
     "citizenship_number": ((387, 444), (789, 484)),
     "contact_number": ((388, 532), (683, 569)),  # Correct coordinates
     "license_category": ((816, 439), (1032, 485)),

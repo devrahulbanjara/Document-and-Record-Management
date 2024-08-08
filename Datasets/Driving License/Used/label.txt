@@ -1,0 +1,10 @@
+license_number 0
+document_type 1
+name 2
+address 3
+dob 4
+father_name 5
+citizenship_number 6
+contact_number 7
+license_category 8
+blood_group 9

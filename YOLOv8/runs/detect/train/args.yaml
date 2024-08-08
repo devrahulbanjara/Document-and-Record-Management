@@ -2,7 +2,7 @@ task: detect
 mode: train
 model: yolov8m.pt
 data: /mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/YOLOv8/data/data.yaml
-epochs: 60
+epochs: 80
 time: null
 patience: 100
 batch: 16
