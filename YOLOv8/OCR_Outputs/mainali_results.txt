@@ -1,0 +1,20 @@
+Class: dob, Text: D.O.B03-03-2005
+Class: address, Text: Address:
+Class: address, Text: Sukepokhari-10
+Class: address, Text: Sarlahi,Janakpur
+Class: address, Text: Nepal
+Class: document_type, Text: DRIVINGLICENSE
+Class: blood_group, Text: B.G.
+Class: blood_group, Text: AB+
+Class: name, Text: Name
+Class: name, Text: SITAL MAINALI
+Class: name, Text: cecress
+Class: contact_number, Text: Contact No.9845441732
+Class: father_name, Text: F/H Name:
+Class: father_name, Text: Geet Prasad Mainal
+Class: license_category, Text: CategoryA.B
+Class: license_number, Text: blood_qroup01-04-01296347
+Class: citizenship_number, Text: Citizenship No.
+Class: citizenship_number, Text: 19027803456
+Class: name, Text: Citizenship No.
+Class: name, Text: 19027803456
