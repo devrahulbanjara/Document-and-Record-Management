@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 11
+names: ['citizenship_number', 'day', 'district', 'document_type', 'father_name', 'gender', 'month', 'municipality', 'name', 'ward', 'year']
+
+roboflow:
+  workspace: rahul-auzyi
+  project: citizenship-test
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rahul-auzyi/citizenship-test/dataset/1

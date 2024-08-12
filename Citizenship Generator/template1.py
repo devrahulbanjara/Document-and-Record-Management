@@ -7,7 +7,7 @@ import random
 font_path = '/home/rahul/Desktop/Document-and-Record-Management/Citizenship Generator/mangal.ttf'
 bold_font_path = '/home/rahul/Desktop/Document-and-Record-Management/Citizenship Generator/Mangal Bold.ttf'
 template_path = '/home/rahul/Desktop/Document-and-Record-Management/Citizenship Generator/template.jpg'
-output_dir = '/home/rahul/Desktop/Document-and-Record-Management/Citizenship Generator/GeneratedImages/'
+output_dir = '/home/rahul/Desktop/Document-and-Record-Management/Citizenship Generator/Template1_Generated_image/'
 
 # Load CSVs
 citizenship_numbers = pd.read_csv('/home/rahul/Desktop/Document-and-Record-Management/Citizenship Generator/Citizenship Number/citizenship_numbers.csv')
@@ -53,7 +53,7 @@ for i in range(800):
     father_name = random.choice(names['Names'])
 
     draw.text((173, 211), citizenship_number, font=bold_font, fill='black')  # Bold font for citizenship number
-    draw.text((338, 233), name, font=font, fill='black')
+    draw.text((338, 232), name, font=font, fill='black')
     draw.text((730, 232), gender, font=font, fill='black')
     draw.text((490, 256), district, font=font, fill='black')
     draw.text((494, 279), municipality, font=font, fill='black')
@@ -63,7 +63,7 @@ for i in range(800):
     draw.text((631, 346), day, font=font, fill='black')
     draw.text((391, 367), father_name, font=font, fill='black')
 
-    # Save the image
-    img.save(os.path.join(output_dir, f'citizenship_{i+1}.jpg'))
+    # Save the image with the new filename format
+    img.save(os.path.join(output_dir, f'template1_citizenship{i+1}.jpg'))
 
 print("800 images generated successfully!")
