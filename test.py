@@ -1,5 +1,4 @@
 import torch
 import torchvision
 
-print(f"PyTorch version: {torch.__version__}")
-print(f"torchvision version: {torchvision.__version__}")
+print(torch.cuda.is_available())
