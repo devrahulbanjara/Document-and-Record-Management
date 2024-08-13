@@ -1,0 +1,13 @@
+train: /home/rahul/Desktop/Document-and-Record-Management/YOLOv8/data/train/images
+val: /home/rahul/Desktop/Document-and-Record-Management/YOLOv8/data/valid/images
+test: /home/rahul/Desktop/Document-and-Record-Management/YOLOv8/data/test/images
+
+nc: 11
+names: ['citizenship_number', 'day', 'district', 'document_type', 'father_name', 'gender', 'month', 'municipality', 'name', 'ward', 'year']
+
+roboflow:
+  workspace: rahul-auzyi
+  project: citizenship-ffinal
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rahul-auzyi/citizenship-ffinal/dataset/2
