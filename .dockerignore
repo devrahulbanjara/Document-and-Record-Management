@@ -1,0 +1,10 @@
+# This dockerignore file automatically ignores everything
+# you will need to add-in directories that you want to include in the docker. 
+# Example: 
+# !src
+
+*
+
+!dbt/
+!src/
+!requirements.txt

@@ -1,0 +1,3 @@
+pyarrow
+pandas[performance, parquet, aws]
+pendulum
