@@ -1,3 +1,11 @@
-pyarrow
-pandas[performance, parquet, aws]
-pendulum
+numpy
+matplotlib
+opencv-python
+pillow
+paddlepaddle
+paddleocr
+scikit-learn
+torch
+torchaudio
+torchvision
+ultralytics
