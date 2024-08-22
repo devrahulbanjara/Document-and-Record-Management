@@ -1,4 +1,2 @@
-import torch
-import torchvision
-
-print(torch.cuda.is_available())
+import os
+print(os.environ.get('TESSDATA_PREFIX'))

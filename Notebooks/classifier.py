@@ -18,11 +18,11 @@ class DocumentClassifier(nn.Module):
             nn.Linear(num_features, 512),
             nn.ReLU(),
             nn.BatchNorm1d(512),
-            nn.Dropout(0.6),  # Increased dropout rate
+            nn.Dropout(0.6),
             nn.Linear(512, 256),
             nn.ReLU(),
             nn.BatchNorm1d(256),
-            nn.Dropout(0.6),  # Increased dropout rate
+            nn.Dropout(0.6),
             nn.Linear(256, num_classes),
             nn.Softmax(dim=1)
         )
@@ -34,27 +34,26 @@ class DocumentClassifier(nn.Module):
         x = self.classifier(x)
         return x
 
-# Enhanced data augmentation with grayscale conversion
 train_transform = transforms.Compose([
-    transforms.Grayscale(num_output_channels=3),  # Convert to grayscale with 3 channels
+    transforms.Grayscale(num_output_channels=3),
     transforms.Resize((224, 224)),
     transforms.RandomHorizontalFlip(),
-    transforms.RandomVerticalFlip(),  # Added vertical flip
-    transforms.RandomRotation(20),  # Increased rotation range
-    transforms.ColorJitter(brightness=0.3, contrast=0.3),  # Increased jitter
-    transforms.RandomAffine(degrees=15, translate=(0.15, 0.15)),  # Increased translation
+    transforms.RandomVerticalFlip(),
+    transforms.RandomRotation(20),
+    transforms.ColorJitter(brightness=0.3, contrast=0.3),
+    transforms.RandomAffine(degrees=15, translate=(0.15, 0.15)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
 val_test_transform = transforms.Compose([
-    transforms.Grayscale(num_output_channels=3),  # Convert to grayscale with 3 channels
+    transforms.Grayscale(num_output_channels=3),
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
-# Dataset and DataLoader
+
 base_dir = '/mnt/c/Users/Rahul/Desktop/Datasets'
 train_dataset = datasets.ImageFolder(root=os.path.join(base_dir, 'train'), transform=train_transform)
 val_dataset = datasets.ImageFolder(root=os.path.join(base_dir, 'val'), transform=val_test_transform)
@@ -64,7 +63,7 @@ train_loader = DataLoader(dataset=train_dataset, batch_size=32, shuffle=True, nu
 val_loader = DataLoader(dataset=val_dataset, batch_size=32, shuffle=False, num_workers=4)
 test_loader = DataLoader(dataset=test_dataset, batch_size=32, shuffle=False, num_workers=4)
 
-# Initialize model, loss, optimizer, and scheduler
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = DocumentClassifier(num_classes=3).to(device)
 criterion = nn.CrossEntropyLoss()
@@ -73,7 +72,7 @@ optimizer = optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-4)
 from torch.optim import lr_scheduler
 scheduler = lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.7)
 
-# Early Stopping class
+
 class EarlyStopping:
     def __init__(self, patience=7):
         self.patience = patience
@@ -92,7 +91,6 @@ class EarlyStopping:
             self.best_loss = val_loss
             self.counter = 0
 
-# Training and validation loop
 def train_and_validate(model, train_loader, val_loader, num_epochs=25):
     early_stopping = EarlyStopping(patience=7)
     
@@ -119,16 +117,13 @@ def train_and_validate(model, train_loader, val_loader, num_epochs=25):
         
         val_loss = validate(model, val_loader)
         early_stopping(val_loss)
-        scheduler.step()  # Update the learning rate
+        scheduler.step()
         
         if early_stopping.early_stop:
             print("Early stopping")
             break
-    
-    # Save the model
     torch.save(model.state_dict(), 'document_classifier.pth')
 
-# Validation
 def validate(model, val_loader):
     model.eval()
     val_loss = 0.0
@@ -148,7 +143,6 @@ def validate(model, val_loader):
     print(f'Validation Loss: {val_loss:.4f}, Accuracy: {val_accuracy:.4f}')
     return val_loss
 
-# Testing
 def test(model, test_loader):
     model.eval()
     correct = 0
@@ -167,21 +161,18 @@ def test(model, test_loader):
     
     accuracy = accuracy_score(all_labels, all_preds)
     print(f'Test Accuracy: {accuracy:.4f}')
-    
-    # Class mapping
+   
     class_mapping = {0: 'citizenship', 1: 'license', 2: 'passport'}
 
-    # Display actual vs predicted
     print("Actual vs Predicted:")
     for label, pred in zip(all_labels, all_preds):
         print(f'Actual: {class_mapping[label]}, Predicted: {class_mapping[pred]}')
 
-    # Visualize some predictions
     import matplotlib.pyplot as plt
     import numpy as np
 
     def imshow(img, title=None):
-        img = img / 2 + 0.5  # Unnormalize
+        img = img / 2 + 0.5
         npimg = img.numpy()
         plt.imshow(np.transpose(npimg, (1, 2, 0)))
         if title is not None:
@@ -193,7 +184,6 @@ def test(model, test_loader):
     outputs = model(images.to(device))
     _, preds = torch.max(outputs, 1)
     
-    # Plotting the images with actual and predicted labels
     plt.figure(figsize=(12, 12))
     for idx in range(16):
         plt.subplot(4, 4, idx + 1)
@@ -202,9 +192,8 @@ def test(model, test_loader):
         plt.axis('off')
     plt.show()
 
-# Call training and validation
 train_and_validate(model, train_loader, val_loader, num_epochs=30)
-# Call testing
+
 test(model, test_loader)
 
 # To load the model later, use:

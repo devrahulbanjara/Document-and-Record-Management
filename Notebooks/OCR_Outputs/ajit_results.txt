@@ -1,0 +1,17 @@
+Class: month, Text: महिनाः ०३
+Class: year, Text: सालः २०६१
+Class: document_type, Text: नेपाली नागरिकताको प्रमाणपत्र
+Class: citizenship_number, Text: नाशप्रशन%
+Class: citizenship_number, Text: २७-०१-७८-००३४१
+Class: day, Text: गतेः
+Class: day, Text: o५
+Class: district, Text: जिल्ला : काठमाडौं
+Class: father_name, Text: बाबुको नम थर :
+Class: father_name, Text: अमृत प्रसाद कोइराला
+Class: ward, Text: वडा नं. :४
+Class: gender, Text: पुरुष
+Class: gender, Text: लिङ्ग
+Class: municipality, Text: नशपाष : तारकेश्वर
+Class: name, Text: नाम थरः
+Class: name, Text: distribt
+Class: name, Text: कोइराला
