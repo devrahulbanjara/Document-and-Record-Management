@@ -1,0 +1,13 @@
+train: /mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/notebooks/data/train/images
+val: /mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/notebooks/data/valid/images
+test: /mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/notebooks/data/test/images
+
+nc: 10
+names: ['address', 'blood_group', 'citizenship_number', 'contact_number', 'dob', 'document_type', 'father_name', 'license_category', 'license_number', 'name']
+
+roboflow:
+  workspace: rahul-auzyi
+  project: license-final
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rahul-auzyi/license-final/dataset/3
