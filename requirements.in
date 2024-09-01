@@ -1,10 +1,12 @@
 numpy
 matplotlib
+mysql-connector
 opencv-python
 pillow
 paddlepaddle
 paddleocr
 scikit-learn
+tensorflow
 torch
 torchaudio
 torchvision
