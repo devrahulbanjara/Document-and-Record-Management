@@ -1,6 +1,5 @@
 numpy
 matplotlib
-mysql-connector
 opencv-python
 pillow
 paddlepaddle
