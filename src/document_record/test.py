@@ -4,9 +4,9 @@ import easyocr
 import os
 import numpy as np
 
-image_path = '/mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/notebooks/YOLOv8/Biswa-_jpg.rf.b79bbd00d55ce91b0d9ce13f9f1d6686.jpg'
-model_path = "/mnt/c/Users/Rahul/Desktop/trained models/Citizenship_model.pt"
 
+image_path = '/mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/notebooks/YOLOv8/a.jpg'
+model_path = "/mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/notebooks/YOLOv8/runs/detect/Citizenship with large model with patience 6, img 600, SGD,  dropout 0.4 , batch 12/weights/best.pt"
 model = YOLO(model_path)
 results = model(image_path)
 image = cv2.imread(image_path)
