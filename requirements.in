@@ -5,6 +5,7 @@ pillow
 paddlepaddle
 paddleocr
 scikit-learn
+streamlit
 tensorflow
 torch
 torchaudio
