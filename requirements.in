@@ -1,13 +1,8 @@
+easyocr
 numpy
 matplotlib
 opencv-python
 pillow
-paddlepaddle
-paddleocr
 scikit-learn
 streamlit
-tensorflow
-torch
-torchaudio
-torchvision
 ultralytics
