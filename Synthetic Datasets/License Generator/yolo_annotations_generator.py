@@ -4,22 +4,17 @@ from PIL import Image
 # Define the annotation coordinates (top-left and bottom-right)
 annotations = {
     "license_number": ((58, 149), (375, 186)),
-    "document_type": ((387, 147), (680, 185)),
     "name": ((390, 188), (804, 224)),
-    "address": ((392, 231), (835, 314)),
     "dob": ((390, 354), (645, 394)),
-    "father_name": ((390, 398), (805, 442)),
     "citizenship_number": ((387, 444), (789, 484)),
-    "contact_number": ((388, 532), (683, 569)),  # Correct coordinates
-    "license_category": ((816, 439), (1032, 485)),
-    "blood_group": ((56, 192), (239, 225)),
+    "contact_number": ((388, 532), (683, 569)),
 }
 
 # Directory containing images
-image_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/output_images"
+image_dir = "/mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/synthetic Datasets/License Generator/output_images"
 
 # Directory to save YOLO annotations
-annotations_dir = "/mnt/c/Users/drenergydrink/Desktop/Document-and-Record-Management/License Generator/annotations"
+annotations_dir = "/mnt/c/Users/Rahul/Desktop/Document-and-Record-Management/synthetic Datasets/License Generator/new"
 os.makedirs(annotations_dir, exist_ok=True)
 
 # Function to convert coordinates to YOLO format
