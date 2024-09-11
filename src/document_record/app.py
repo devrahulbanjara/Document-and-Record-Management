@@ -6,6 +6,7 @@ import tensorflow as tf
 import os
 from tensorflow.keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input
+from ultralytics import YOLO
 
 Classification_model_path = "/mnt/c/Users/Rahul/Desktop/trained models/Classification_model.h5"
 classification_model = tf.keras.models.load_model(Classification_model_path)
@@ -14,6 +15,14 @@ st.write("Document and Record Management")
 st.write("Please insert a document image (Citizenship, Driving License or Passport)")
 
 uploaded_image = st.file_uploader("Choose an image", type=['png', 'jpg'])
+
+license_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/License_model.pt"
+citizenship_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/Citizenship_model.pt"
+passport_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/withdocumenttypw_Passport_model.pt"
+
+license_model = YOLO(license_model_path)
+citizenship_model = YOLO(citizenship_model_path)
+passport_model = YOLO(passport_model_path)
 
 if uploaded_image:
     st.write("Image uploaded")
@@ -36,3 +45,6 @@ if uploaded_image:
     predicted_class_label = class_mapping[predicted_class_index]
     st.write('Predicted class: ' + predicted_class_label)
     st.write('Confidence: ' + str(confidence))
+
+    
+    
