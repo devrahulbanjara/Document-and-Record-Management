@@ -151,7 +151,45 @@ if uploaded_image:
         st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed Image")
             
     elif predicted_class_label == "Passport":
-        st.write("Processing Passport document...")
-        results = passport_model(img_gray)
+        ocr = easyocr.Reader("en")
+        st.write("Processing License document...")
+        results = citizenship_model(img_gray)
+        
+        collected_texts = {label: [] for label in license_class_mapping.values()}
+        highest_conf_boxes = {}
+        
         for result in results:
-            st.write(result)
+            boxes = result.boxes.xyxy
+            class_ids = result.boxes.cls
+            confidences = result.boxes.conf
+
+            for i in range(len(class_ids)):
+                class_id = int(class_ids[i])
+                confidence = confidences[i]
+                x1, y1, x2, y2 = map(int, boxes[i].tolist())
+                label = license_class_mapping.get(class_id, "Unknown")
+
+                # Update highest confidence box for each class
+                if label not in highest_conf_boxes or confidence > highest_conf_boxes[label][1]:
+                    highest_conf_boxes[label] = [(x1, y1, x2, y2), confidence]
+
+        # Draw bounding boxes and process OCR for the highest confidence boxes
+        for label, (box, confidence) in highest_conf_boxes.items():
+            x1, y1, x2, y2 = box
+            cropped_img = img_bgr[y1:y2, x1:x2]
+            
+            ocr_result = ocr.readtext(cropped_img)
+            
+            for detection in ocr_result:
+                text = detection[1]
+                collected_texts[label].append(text)
+
+            color = (255, 255, 255)
+            thickness = 4
+            font_scale = 1.5
+            font_thickness = 3
+
+            cv2.rectangle(img_bgr, (x1, y1), (x2, y2), color, thickness)
+            cv2.putText(img_bgr, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
+        
+        st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed Image")
