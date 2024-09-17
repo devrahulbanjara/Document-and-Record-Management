@@ -5,4 +5,6 @@ opencv-python
 pillow
 scikit-learn
 streamlit
+tensorflow
+torch
 ultralytics
