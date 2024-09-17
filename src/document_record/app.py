@@ -11,12 +11,12 @@ import torch
 
 # Paths to models and data
 database_path = "database.json"
-Classification_model_path = "/mnt/c/Users/Rahul/Desktop/trained models/Classification_model.h5"
+Classification_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/Classification_model.h5"
 license_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/License_model.pt"
 citizenship_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/Citizenship_model.pt"
 passport_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/withoutdocumenttype_Passport_model.pt"
 
-# Load the classification model and YOLO models for different document types
+#load models
 classification_model = tf.keras.models.load_model(Classification_model_path)
 license_model = YOLO(license_model_path)
 citizenship_model = YOLO(citizenship_model_path)
@@ -61,16 +61,9 @@ def correct_image_orientation(uploaded_file):
     image = ImageOps.exif_transpose(image)  # Corrects for camera rotation
     return image
 
-# Generate a random color for drawing bounding boxes
-def get_color(class_id):
-    np.random.seed(class_id)
-    return tuple(np.random.randint(0, 255, 3).tolist())
-
-# Streamlit app interface
 st.write("Document and Record Management")
 st.write("Please insert a document image (Citizenship, Driving License, or Passport)")
 
-# Allow user to upload an image
 uploaded_image = st.file_uploader("Choose an image", type=['png', 'jpg'])
 
 # If an image is uploaded, process it
@@ -109,7 +102,7 @@ if uploaded_image:
         
     elif predicted_class_label == "Citizenship":
         st.write("Processing Citizenship document...")
-        ocr = easyocr.Reader(["ne", "en"])  # Use English and Nepali for Citizenship documents
+        ocr = easyocr.Reader(["ne", "en"])
         results = citizenship_model(img_bgr)
         
     elif predicted_class_label == "Passport":
@@ -121,8 +114,9 @@ if uploaded_image:
         st.image(img_array, caption="Original Image")
         st.stop()
     
-    # Dictionary to store the highest confidence box for each label
+    #Initialize a new dictionary with key as classes and values as empty list
     collected_texts = {label: [] for label in class_mappings[predicted_class_label].values()}
+    # Dictionary to store the highest confidence box for each label
     highest_conf_boxes = {}
 
     # Loop through the YOLO detection results
@@ -131,7 +125,7 @@ if uploaded_image:
         class_ids = result.boxes.cls.cpu().numpy()  # YOLO class IDs (Move to CPU and convert)
         confidences = result.boxes.conf.cpu().numpy()  # YOLO confidence scores (Move to CPU)
 
-        # Apply NMS using PyTorch's built-in non_max_suppression (already part of YOLO output)
+        # Apply NMS
         for i in range(len(class_ids)):
             class_id = int(class_ids[i])
             confidence = confidences[i]
@@ -156,7 +150,7 @@ if uploaded_image:
             collected_texts[label].append(text)
 
         # Draw the bounding box and label on the image
-        color = get_color(class_id)
+        color = (255,0,0)
         font_scale = 1.5
         font_thickness = 3
 
