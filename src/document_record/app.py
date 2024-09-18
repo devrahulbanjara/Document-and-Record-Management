@@ -9,11 +9,11 @@ import easyocr
 from paddleocr import PaddleOCR
 
 # Paths to models and data
-database_path = "../../database.json"
-Classification_model_path = r"../../../trained models/Classification_model.h5"
-license_model_path = r"../../../trained models/License_model.pt"
-citizenship_model_path = r"../../../trained models/Citizenship_model.pt"
-passport_model_path = r"../../../trained models/withoutdocumenttype_Passport_model.pt"
+database_path = "database.json"
+Classification_model_path = r"/home/rahul/Desktop/trained models/Classification_model.h5"
+license_model_path = r"/home/rahul/Desktop/trained models/License_model.pt"
+citizenship_model_path = r"/home/rahul/Desktop/trained models/Citizenship_model.pt"
+passport_model_path = r"/home/rahul/Desktop/trained models/withoutdocumenttype_Passport_model.pt"
 
 # Load models
 classification_model = tf.keras.models.load_model(Classification_model_path)
@@ -143,7 +143,6 @@ if uploaded_image:
         x2 = min(width, x2)
         y2 = min(height, y2)
 
-        # Crop from the original image (img_array), not the BGR image
         cropped_img = img_array[y1:y2, x1:x2]
 
         # Check if the cropped image is not empty
@@ -158,6 +157,7 @@ if uploaded_image:
                 text = detection[1]
                 collected_texts[label].append(text)
         else:
+            ocr_result = ocr.ocr(cropped_img, cls=True)
             text_detected = " ".join([word_info[1][0] for word_info in ocr_result[0] if word_info[1]])
             collected_texts[label].append(text_detected.strip()) 
 
