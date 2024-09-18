@@ -2,6 +2,8 @@ easyocr
 numpy
 matplotlib
 opencv-python
+paddleocr
+paddlepaddle
 pillow
 scikit-learn
 streamlit
