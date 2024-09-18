@@ -2,21 +2,19 @@ import streamlit as st
 from PIL import Image, ImageOps
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.preprocessing import image as keras_image
 from keras.applications.resnet50 import preprocess_input
 from ultralytics import YOLO
 import cv2
 import easyocr
-import torch
 
 # Paths to models and data
 database_path = "database.json"
-Classification_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/Classification_model.h5"
-license_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/License_model.pt"
-citizenship_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/Citizenship_model.pt"
-passport_model_path = r"/mnt/c/Users/Rahul/Desktop/trained models/withoutdocumenttype_Passport_model.pt"
+Classification_model_path = r"/home/rahul/Desktop/trained models/Classification_model.h5"
+license_model_path = r"/home/rahul/Desktop/trained models/License_model.pt"
+citizenship_model_path = r"/home/rahul/Desktop/trained models/Citizenship_model.pt"
+passport_model_path = r"/home/rahul/Desktop/trained models/withoutdocumenttype_Passport_model.pt"
 
-#load models
+# Load models
 classification_model = tf.keras.models.load_model(Classification_model_path)
 license_model = YOLO(license_model_path)
 citizenship_model = YOLO(citizenship_model_path)
@@ -61,8 +59,8 @@ def correct_image_orientation(uploaded_file):
     image = ImageOps.exif_transpose(image)  # Corrects for camera rotation
     return image
 
-st.write("Document and Record Management")
-st.write("Please insert a document image (Citizenship, Driving License, or Passport)")
+st.markdown("<h1 style='text-align: center;'>Document and Record Management</h1>", unsafe_allow_html=True)
+st.write("You can either use webcam to upload an image or upload a scanned image.")
 
 uploaded_image = st.file_uploader("Choose an image", type=['png', 'jpg'])
 
@@ -82,86 +80,96 @@ if uploaded_image:
 
     # Predict the document type using the classification model
     predictions = classification_model.predict(img_preprocessed)
-    predicted_class_index = np.argmax(predictions, axis=1)[0]  # Get the index of the highest probability
-    confidence = np.max(predictions)  # Get the highest probability
+    predicted_class_index = np.argmax(predictions, axis=1)[0]
+    confidence = np.max(predictions)
 
-    # Map the predicted index to the corresponding document type label
     predicted_class_label = class_mapping_for_classification[predicted_class_index]
     st.write('Predicted class: ' + predicted_class_label)
     st.write('Confidence: ' + str(confidence))
 
-    # Convert image to grayscale and then back to BGR (YOLO model expects BGR format)
+    # Convert image to grayscale and then back to BGR
     img_gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
     img_bgr = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
 
     # Initialize OCR for text extraction
     ocr = easyocr.Reader(["en"])
+    
     if predicted_class_label == "License":
         st.write("Processing License document...")
         results = license_model(img_bgr)
         
     elif predicted_class_label == "Citizenship":
         st.write("Processing Citizenship document...")
-        ocr = easyocr.Reader(["ne", "en"])
         results = citizenship_model(img_bgr)
+        ocr = easyocr.Reader(["ne"])
         
     elif predicted_class_label == "Passport":
         st.write("Processing Passport document...")
         results = passport_model(img_bgr)
+        ocr = easyocr.Reader(["ne", "en"])
         
     else:
         st.write('Document type not supported for detailed processing.')
         st.image(img_array, caption="Original Image")
         st.stop()
-    
-    #Initialize a new dictionary with key as classes and values as empty list
+
     collected_texts = {label: [] for label in class_mappings[predicted_class_label].values()}
-    # Dictionary to store the highest confidence box for each label
     highest_conf_boxes = {}
 
     # Loop through the YOLO detection results
     for result in results:
-        boxes = result.boxes.xyxy.cpu().numpy()  # Move to CPU and convert to NumPy
-        class_ids = result.boxes.cls.cpu().numpy()  # YOLO class IDs (Move to CPU and convert)
-        confidences = result.boxes.conf.cpu().numpy()  # YOLO confidence scores (Move to CPU)
+        if result.boxes is not None:
+            boxes = result.boxes.xyxy.cpu().numpy()
+            class_ids = result.boxes.cls.cpu().numpy()
+            confidences = result.boxes.conf.cpu().numpy()
 
-        # Apply NMS
-        for i in range(len(class_ids)):
-            class_id = int(class_ids[i])
-            confidence = confidences[i]
-            x1, y1, x2, y2 = map(int, boxes[i].tolist())  # Get coordinates
-            label = class_mappings[predicted_class_label].get(class_id, "Unknown")
+            for i in range(len(class_ids)):
+                class_id = int(class_ids[i])
+                confidence = confidences[i]
+                x1, y1, x2, y2 = map(int, boxes[i].tolist())
+                label = class_mappings[predicted_class_label].get(class_id, "Unknown")
 
-            # Update the highest confidence box for each label
-            if label not in highest_conf_boxes or confidence > highest_conf_boxes[label][1]:
-                highest_conf_boxes[label] = [(x1, y1, x2, y2), confidence]
+                if label not in highest_conf_boxes or confidence > highest_conf_boxes[label][1]:
+                    highest_conf_boxes[label] = [(x1, y1, x2, y2), confidence]
 
-    # Process each highest confidence box for OCR and visualization
+    # Image dimensions for cropping
+    height, width = img_bgr.shape[:2]
+
     for label, (box, confidence) in highest_conf_boxes.items():
         x1, y1, x2, y2 = box
-        cropped_img = img_bgr[y1:y2, x1:x2]  # Crop the detected region
-        
-        # Perform OCR on the cropped region
+
+        # Ensure coordinates are within image bounds
+        x1 = max(0, x1)
+        y1 = max(0, y1)
+        x2 = min(width, x2)
+        y2 = min(height, y2)
+
+        # Crop from the original image (img_array), not the BGR image
+        cropped_img = img_array[y1:y2, x1:x2]
+
+        # Check if the cropped image is not empty
+        if cropped_img.size == 0:
+            st.write(f"Warning: Cropped image for {label} is empty.")
+            continue
+
         ocr_result = ocr.readtext(cropped_img)
-        
-        # Collect the detected text
+
         for detection in ocr_result:
             text = detection[1]
             collected_texts[label].append(text)
 
-        # Draw the bounding box and label on the image
-        color = (255,0,0)
-        font_scale = 1.5
-        font_thickness = 3
+        color = (255, 0, 0)
+        font_scale = 1.2
+        font_thickness = 2
 
+        # Draw rectangles and labels on the BGR image for visualization
         cv2.rectangle(img_bgr, (x1, y1), (x2, y2), color, 2)
         cv2.putText(img_bgr, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
-    
-    # Display the processed image with bounding boxes
+
+
     st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed Image")
-    
-    # Display extracted text for each label
+
     st.write("Extracted Texts:")
     with open(database_path, "w") as db:
         for label, texts in collected_texts.items():
-            st.write(f"{label}: {'; '.join(texts)}")
+            st.write(f"{label}: {' '.join(texts)}")
