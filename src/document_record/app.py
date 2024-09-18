@@ -6,6 +6,7 @@ from keras.applications.resnet50 import preprocess_input
 from ultralytics import YOLO
 import cv2
 import easyocr
+from paddleocr import PaddleOCR
 
 # Paths to models and data
 database_path = "../../database.json"
@@ -94,7 +95,7 @@ if uploaded_image:
     if predicted_class_label == "License":
         st.write("Processing License document...")
         results = license_model(img_bgr)
-        ocr = easyocr.Reader(["en"])
+        ocr = PaddleOCR(use_angle_cls=True, lang='en')
         
     elif predicted_class_label == "Citizenship":
         st.write("Processing Citizenship document...")
@@ -104,7 +105,7 @@ if uploaded_image:
     elif predicted_class_label == "Passport":
         st.write("Processing Passport document...")
         results = passport_model(img_bgr)
-        ocr = easyocr.Reader(["en"])
+        ocr = PaddleOCR(use_angle_cls=True, lang='en')
         
     else:
         st.write('Document type not supported for detailed processing.')
@@ -150,11 +151,15 @@ if uploaded_image:
             st.write(f"Warning: Cropped image for {label} is empty.")
             continue
 
-        ocr_result = ocr.readtext(cropped_img)
+        if predicted_class_label == "Citizenship":
+            ocr_result = ocr.readtext(cropped_img)
 
-        for detection in ocr_result:
-            text = detection[1]
-            collected_texts[label].append(text)
+            for detection in ocr_result:
+                text = detection[1]
+                collected_texts[label].append(text)
+        else:
+            text_detected = " ".join([word_info[1][0] for word_info in ocr_result[0] if word_info[1]])
+            collected_texts[label].append(text_detected.strip()) 
 
         color = (255, 0, 0)
         font_scale = 1.2
@@ -165,7 +170,7 @@ if uploaded_image:
         cv2.putText(img_bgr, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
 
 
-    st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed Image")
+    st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
 
     st.write("Extracted Texts:")
     with open(database_path, "w") as db:

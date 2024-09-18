@@ -1,0 +1,89 @@
+{
+  "123": {
+    "Citizenship": 
+      {
+        "name": "Rahul Dev Banjara",
+        "year_of_birth": "2004-04-06",
+        "gender": "Male",
+        "birth_place": "Kathmandu",
+        "citizenship_number": "123"
+      }
+    ,
+    "License": 
+      {
+        "name": "Rahul Dev Banjara",
+        "year_of_birth": "1990-05-15",
+        "contact_number": "9876543210",
+        "citizenship_number": "CIT123",
+        "license_number": "56"
+      }
+    ,
+    "Passport": 
+      {
+        "name": "Rahul Dev",
+        "surname": "Banjara",
+        "year_of_birth": "1990-05-15",
+        "citizenship_number": "123",
+        "passport_number": "78"
+      }
+    
+  },
+  "1234": {
+    "Citizenship": 
+      {
+        "name": "Priti",
+        "year_of_birth": "1995-12-07",
+        "gender": "Female",
+        "birth_place": "Nepalgunj",
+        "citizenship_number": "1234"
+      }
+    ,
+    "License": 
+      {
+        "name": "Priti Paudel Jaisi",
+        "year_of_birth": "1995-12-07",
+        "contact_number": "9876543221",
+        "citizenship_number": "1234",
+        "license_number": "12"
+      }
+    ,
+    "Passport": 
+      {
+        "name": "Priti",
+        "surname": "Paudel Jaisi",
+        "year_of_birth": "1995-12-07",
+        "citizenship_number": "1234",
+        "passport_number": "55"
+      }
+    
+  },
+  "12345": {
+    "Citizenship": 
+      {
+        "name": "Aayush Neupane",
+        "year_of_birth": "1988-09-23",
+        "gender": "Male",
+        "birth_place": "Nuwakot",
+        "citizenship_number": "12345"
+      }
+    ,
+    "License": 
+      {
+        "name": "Aayush Neupane",
+        "year_of_birth": "1988-09-23",
+        "contact_number": "9876543232",
+        "citizenship_number": "12345",
+        "license_number": "54"
+      }
+    ,
+    "Passport": 
+      {
+        "name": "Aayush",
+        "surname": "Neupane",
+        "year_of_birth": "1988-09-23",
+        "citizenship_number": "12345",
+        "passport_number": "87"
+      }
+    
+  }
+}
