@@ -8,11 +8,11 @@ import cv2
 import easyocr
 
 # Paths to models and data
-database_path = "database.json"
-Classification_model_path = r"/home/rahul/Desktop/trained models/Classification_model.h5"
-license_model_path = r"/home/rahul/Desktop/trained models/License_model.pt"
-citizenship_model_path = r"/home/rahul/Desktop/trained models/Citizenship_model.pt"
-passport_model_path = r"/home/rahul/Desktop/trained models/withoutdocumenttype_Passport_model.pt"
+database_path = "../../database.json"
+Classification_model_path = r"../../../trained models/Classification_model.h5"
+license_model_path = r"../../../trained models/License_model.pt"
+citizenship_model_path = r"../../../trained models/Citizenship_model.pt"
+passport_model_path = r"../../../trained models/withoutdocumenttype_Passport_model.pt"
 
 # Load models
 classification_model = tf.keras.models.load_model(Classification_model_path)
@@ -91,12 +91,10 @@ if uploaded_image:
     img_gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
     img_bgr = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
 
-    # Initialize OCR for text extraction
-    ocr = easyocr.Reader(["en"])
-    
     if predicted_class_label == "License":
         st.write("Processing License document...")
         results = license_model(img_bgr)
+        ocr = easyocr.Reader(["en"])
         
     elif predicted_class_label == "Citizenship":
         st.write("Processing Citizenship document...")
@@ -106,7 +104,7 @@ if uploaded_image:
     elif predicted_class_label == "Passport":
         st.write("Processing Passport document...")
         results = passport_model(img_bgr)
-        ocr = easyocr.Reader(["ne", "en"])
+        ocr = easyocr.Reader(["en"])
         
     else:
         st.write('Document type not supported for detailed processing.')
