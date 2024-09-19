@@ -1,15 +1,12 @@
 import streamlit as st
 from PIL import Image, ImageOps
 import numpy as np
-import tensorflow as tf
 from keras.applications.resnet50 import preprocess_input
-from ultralytics import YOLO
 import cv2
-import easyocr
-from paddleocr import PaddleOCR
 from classification import classify_image
 from detection import detector
 from ocrtext import perform_ocr
+from database import insert_passport
 
 database_path = "database.json"
 
@@ -49,7 +46,19 @@ if uploaded_image:
 
     st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
 
-    st.write("Extracted Texts:")
+    # st.write("Extracted Texts:")
     with open(database_path, "w") as db:
         for label, texts in collected_texts.items():
             st.write(f"{label}: {' '.join(texts)}")
+
+    name = st.text_input("Name")
+    surname = st.text_input("Surname")
+    dob = st.date_input("Date of Birth")
+    citizenship_number = st.text_input("Citizenship Number")
+    passport_number = st.text_input("Passport Number")
+
+    if st.button("Submit"):
+        if name and surname and passport_number.isdigit():
+            insert_passport(name, surname, dob, citizenship_number, passport_number)
+        else:
+            st.error("Please fill all fields and ensure passport number is valid.")
