@@ -6,7 +6,7 @@ import cv2
 from classification import classify_image
 from detection import detector
 from ocrtext import perform_ocr
-from database import insert_passport
+from database import insert_passport, insert_license, insert_citizenship, citizenship_exists, doc_info_exists
 
 database_path = "database.json"
 
@@ -51,14 +51,26 @@ if uploaded_image:
         for label, texts in collected_texts.items():
             st.write(f"{label}: {' '.join(texts)}")
 
-    name = st.text_input("Name")
-    surname = st.text_input("Surname")
-    dob = st.date_input("Date of Birth")
-    citizenship_number = st.text_input("Citizenship Number")
-    passport_number = st.text_input("Passport Number")
-
-    if st.button("Submit"):
-        if name and surname and passport_number.isdigit():
-            insert_passport(name, surname, dob, citizenship_number, passport_number)
+    name = "Aayush"
+    surname = "Neupane"
+    dob = "2006-04-06"
+    passport_number = "1234"
+    contact_number = "9876543232"
+    district = "Nuwakot"
+    gender = "Male"
+    citizenship_number = "12345"
+    
+    if citizenship_exists(citizenship_number):
+        if not doc_info_exists(predicted_class_label, citizenship_number):
+            if predicted_class_label == "Passport":
+                insert_passport(name, surname, dob, citizenship_number, passport_number)
+            elif predicted_class_label == "Citizenship":
+                insert_citizenship(name, district, dob, citizenship_number, gender)
+            elif predicted_class_label == "License":
+                insert_license(name, contact_number, dob, citizenship_number, passport_number)
+            st.write("Successfully inserted " + predicted_class_label + " of " + name + " to the database.")
         else:
-            st.error("Please fill all fields and ensure passport number is valid.")
+            st.warning("This person already has " + predicted_class_label + " info in the database.")            
+    else:
+        st.warning("The person with citizenship number does not exist in the database.")
+
