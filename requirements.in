@@ -3,7 +3,7 @@ numpy
 matplotlib
 opencv-python
 paddleocr
-paddlepaddle
+paddlepaddle-gpu
 pillow
 scikit-learn
 streamlit
