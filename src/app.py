@@ -7,6 +7,7 @@ from classification import classify_image
 from detection import detector
 from ocrtext import perform_ocr
 from database import insert_passport, insert_license, insert_citizenship, citizenship_exists, doc_info_exists
+# from filter_citizenship
 
 database_path = "database.json"
 
@@ -49,13 +50,14 @@ if uploaded_image:
         perform_ocr(highest_conf_boxes, ocr,predicted_class_label, collected_texts, img_array, img_bgr)
 
         st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
-
         
-        for label, texts in collected_texts.items():
-            st.write(' '.join(texts))
-            # st.write(f"{label}: {' '.join(texts)}")
+        # i=0
+        # if predicted_class_label == "Citizenship":
+        #     filter
+        #     for label, texts in collected_texts.items():
+        #         # st.write(f"{label}: {' '.join(texts)}")
 
-
+        print(collected_texts)    
 
 
 

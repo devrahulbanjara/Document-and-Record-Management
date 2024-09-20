@@ -1,5 +1,3 @@
-
-
 nepali_to_english_mapping = {
     "०": "0",
     "१": "1",
@@ -13,7 +11,29 @@ nepali_to_english_mapping = {
     "९": "9"
 }
 
-english_filtered_citizenship_number = ""
+def filter_number(ulfiltered_number):
+    english_number = ""
 
-for digit in nepali_filtered_citizenship_number:
-    english_filtered_citizenship_number += nepali_to_english_mapping[digit]
+    for digit in ulfiltered_number:
+        if digit in nepali_to_english_mapping.keys():
+            english_number += nepali_to_english_mapping[digit]
+
+    return english_number
+
+def filter_text(unfiltered_text):
+    unwanted = [
+        '।', '॥', '|', '-', '.', ',', '?', '!', '(', ')', '[', ']', '{', '}', ':', ';', 
+        '_', '*', '#', '@', '&', '%', '$', 
+        '०', '१', '२', '३', '४', '५', '६', '७', '८', '९'
+    ]
+
+    filtered_text = ""
+    for alphabet in unfiltered_text:
+        if alphabet in unwanted:
+            continue
+        filtered_text += alphabet
+
+    return filtered_text
+
+print(filter_number("ना.प्रननं. २५-०१-७९-०२७३८"))  # Output: 25-01-79-02738
+print(filter_text("ना.प्रननं. २५-०१-७९-०२७३८ जिल्ला : नुवाकोट"))  # Output: "ना प्रननं  जिल्ला  नुवाकोट"
