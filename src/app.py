@@ -50,10 +50,21 @@ if uploaded_image:
 
         st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
 
-        # st.write("Extracted Texts:")
-        with open(database_path, "w") as db:
-            for label, texts in collected_texts.items():
-                st.write(f"{label}: {' '.join(texts)}")
+        
+        for label, texts in collected_texts.items():
+            st.write(' '.join(texts))
+            # st.write(f"{label}: {' '.join(texts)}")
+
+
+
+
+
+
+
+
+
+
+
 
         # name = "Aayush"
         # surname = "Neupane"
