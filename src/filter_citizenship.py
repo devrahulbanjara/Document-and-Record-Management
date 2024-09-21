@@ -29,11 +29,14 @@ def filter_text(unfiltered_text):
 
     filtered_text = ""
     for alphabet in unfiltered_text:
-        if alphabet in unwanted:
-            continue
-        filtered_text += alphabet
+        if alphabet not in unwanted:
+            filtered_text += alphabet
 
-    return filtered_text
+    return filtered_text.split()
 
-print(filter_number("ना.प्रननं. २५-०१-७९-०२७३८"))  # Output: 25-01-79-02738
-print(filter_text("ना.प्रननं. २५-०१-७९-०२७३८ जिल्ला : नुवाकोट"))  # Output: "ना प्रननं  जिल्ला  नुवाकोट"
+# print(filter_number("ना.प्रननं. २५-०१-७९-०२७३८"))  # Output: 25-01-79-02738
+print(filter_text("जिल्ला : नुवाकोट"))  # Output: "ना प्रननं  जिल्ला  नुवाकोट"
+
+
+
+#text ko cast ma filter text function ma pass garera list ma output dinxa tesko [1:]
