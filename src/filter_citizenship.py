@@ -11,10 +11,10 @@ nepali_to_english_mapping = {
     "९": "9"
 }
 
-def filter_number(ulfiltered_number):
+def filter_number(unfiltered_number):
     english_number = ""
 
-    for digit in ulfiltered_number:
+    for digit in unfiltered_number:
         if digit in nepali_to_english_mapping.keys():
             english_number += nepali_to_english_mapping[digit]
 
@@ -24,7 +24,10 @@ def filter_text(unfiltered_text):
     unwanted = [
         '।', '॥', '|', '-', '.', ',', '?', '!', '(', ')', '[', ']', '{', '}', ':', ';', 
         '_', '*', '#', '@', '&', '%', '$', 
-        '०', '१', '२', '३', '४', '५', '६', '७', '८', '९'
+        '०', '१', '२', '३', '४', '५', '६', '७', '८', '९',
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+        '~', '`', '+', '=', '<', '>', '\\', '"', "'", ';', '¬', '^', '°', '§', '¤', '©', '®', 
+        '¥', '¢', '£', '€', '•', '-', '—', '…', '«', '»', '<', '>'
     ]
 
     filtered_text = ""
@@ -34,9 +37,52 @@ def filter_text(unfiltered_text):
 
     return filtered_text.split()
 
-# print(filter_number("ना.प्रननं. २५-०१-७९-०२७३८"))  # Output: 25-01-79-02738
-print(filter_text("जिल्ला : नुवाकोट"))  # Output: "ना प्रननं  जिल्ला  नुवाकोट"
+def filter_citizenship_details(collected_texts):
+    male = "परष"
+    female = "महल"
+    others = "अनय"
 
+    extracted_texts = {}
+    name_concat = ""
 
+    for label, texts in collected_texts.items():
+        filtered_values = []
 
-#text ko cast ma filter text function ma pass garera list ma output dinxa tesko [1:]
+        for text in texts:
+            if label == 'citizenship_number' or label == 'year':
+                filtered_value = filter_number(text)
+                if filtered_value:
+                    filtered_values.append(filtered_value)
+            elif label == 'gender':
+                if "ल" in text and "ि" in text and len(text) <= 5:
+                    continue
+                if any(char in text for char in female):
+                    gender = "महिला"
+                elif any(char in text for char in male):
+                    gender = "पुरुष"
+                elif any(char in text for char in others):
+                    gender = "अन्य"
+                filtered_values.append(gender)
+            elif label == "district":
+                filtered_text = filter_text(text)
+                for word in filtered_text:
+                    if "ज" in word and "ल" in word:
+                        continue
+                    filtered_values.append(word)
+                    
+            elif label == "name":
+                filtered_text = filter_text(text)
+                for word in filtered_text:
+                    if "नाम" in word or "थर" in word:
+                        continue
+                    filtered_values.append(word)
+
+        if filtered_values:
+            if label in ['citizenship_number', 'year']:
+                extracted_texts[label] = " ".join(filtered_values).replace(" ", "")
+            else:
+                extracted_texts[label] = " ".join(filtered_values)
+        else:
+            extracted_texts[label] = ""
+
+    return extracted_texts
