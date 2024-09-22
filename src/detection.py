@@ -53,7 +53,6 @@ def detector(pred_class, img_bgr):
         
     else:
         st.write('Document type not supported for detailed processing.')
-        st.image(img_array, caption="Original Image")
         st.stop()
         
     collected_texts = {label: [] for label in class_mappings[pred_class].values()}

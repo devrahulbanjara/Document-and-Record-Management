@@ -7,7 +7,7 @@ from classification import classify_image
 from detection import detector
 from ocrtext import perform_ocr
 from database import insert_passport, insert_license, insert_citizenship, citizenship_exists, doc_info_exists
-from filter_citizenship import filter_number, filter_text
+from filter_citizenship import filter_citizenship_details
 
 database_path = "database.json"
 
@@ -51,17 +51,12 @@ if uploaded_image:
 
         st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
         
-        st.write("Filtered OCR Texts:")
-        
-        for label, texts in collected_texts.items():
-            filtered_values = []
-            for text in texts:
-                if label == 'citizenship_number' or label == 'year':
-                    filtered_value = filter_number(text)  # Handle the numeric fields
-                    filtered_values.append(filtered_value)
-                else:
-                    filtered_value = filter_text(text)  # Handle the text fields, returns a list of words
-                    filtered_values.extend(filtered_value)
+        if predicted_class_label == "Citizenship":
+            details = filter_citizenship_details(collected_texts)
+            print(collected_texts)
+            st.write("Predicted by model")
+            st.write(list(collected_texts.values()))
+            st.write()
+            st.write("Filtered")
 
-            # Print the required output in the list form
-            st.write(f"{filtered_values}")
+            st.write(list(details.values()))

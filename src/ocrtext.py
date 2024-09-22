@@ -28,7 +28,7 @@ def perform_ocr(highest_conf_boxes,ocr,predicted_class_label,collected_texts,img
         font_scale = 1.2
         font_thickness = 2
 
-        cv2.rectangle(img_bgr, (x1, y1), (x2, y2), color, 2)
-        cv2.putText(img_bgr, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
+        # cv2.rectangle(img_bgr, (x1, y1), (x2, y2), color, 2)
+        # cv2.putText(img_bgr, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
     
     return
