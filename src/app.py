@@ -6,7 +6,7 @@ import cv2
 from classification import classify_image
 from detection import detector
 from ocrtext import perform_ocr
-from database import insert_passport, insert_license, insert_citizenship, citizenship_exists, doc_info_exists
+from database import check_citizenship_number,check_document
 from filter_citizenship import filter_citizenship_details
 from filter_license import filter_license_details
 from filter_passport import filter_passport_details
@@ -24,7 +24,6 @@ st.write("You can either use webcam to upload an image or upload a scanned image
 uploaded_image = st.file_uploader("Choose an image", type=['png', 'jpg'])
 
 if uploaded_image:
-    st.write("Image uploaded")
     
     img = correct_image_orientation(uploaded_image)
     img = img.convert('RGB')
@@ -36,7 +35,8 @@ if uploaded_image:
 
     predicted_class_label,confidence = classify_image(img_preprocessed)
     
-    st.write('Predicted class: ' + predicted_class_label + ' with confidence: ' + str(confidence))
+    st.write('The document is : ' + predicted_class_label )
+    st.write('Confidence: ' + str(confidence))
 
     if predicted_class_label == "Other documents":
         st.warning('Document type not supported for checking in the database.')
@@ -44,39 +44,55 @@ if uploaded_image:
     else:
         img_gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
         img_bgr = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
-        height, width = img_bgr.shape[:2]
-
+                
         highest_conf_boxes, ocr , collected_texts = detector(predicted_class_label, img_bgr)
 
         collected_texts = perform_ocr(highest_conf_boxes, ocr,predicted_class_label, collected_texts, img_array, img_bgr)
 
-        st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
-        
-        print(collected_texts)
-            
-        st.write("Predicted by model")
-        st.write(list(collected_texts.values()))
-        
+        st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Provided document image")
+                    
+        print("Non filtered    " + str(list(collected_texts.values())))
+               
         if predicted_class_label == "Citizenship":
             details = filter_citizenship_details(collected_texts)
             
             st.write()
             
-            st.write("Filtered")
-            st.write(list(details.values()))
-            
-        if predicted_class_label == "License":
+            exists = check_citizenship_number(details["citizenship_number"],details["name"])
+            if not exists:
+                st.warning("The given citizenship number doesn't exist.")
+                print(f"No match found")
+
+            else:
+                st.warning("This is a genuine "+predicted_class_label)
+                print(f"80% match found")
+                
+            print("Filtered    " + str(list(details.values())))
+
+        elif predicted_class_label == "License":
             details = filter_license_details(collected_texts)
             
             st.write()
             
-            st.write("Filtered")
-            st.write(list(details.values()))
+            exists = check_citizenship_number(details["citizenship_number"],details["name"])
+            if not exists:
+                st.warning("The ctizenship number doesnt exist which is given in the license.")
+                
+            check_document(details["citizenship_number"],details["license_number"],predicted_class_label)
             
-        else:
+            print("Filtered    " + str(list(details.values())))
+
+            
+        elif predicted_class_label == "Passport":
             details = filter_passport_details(collected_texts)
             
             st.write()
+            exists = check_citizenship_number(details["citizenship_number"],details["name"])
+            if not exists:
+                st.warning("The ctizenship number doesnt exist which is given in the passport.")
+                
+            check_document(details["citizenship_number"],details["passport_number"],predicted_class_label)
+
             
-            st.write("Filtered")
-            st.write(list(details.values()))
+            print("Filtered    " + str(list(details.values())))
+

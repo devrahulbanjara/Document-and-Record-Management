@@ -38,16 +38,13 @@ class_mappings = {
 
 def detector(pred_class, img_bgr):
     if pred_class == "License":
-        st.write("Processing License document...")
         results = license_model(img_bgr)
         ocr = PaddleOCR(use_angle_cls=True, lang='en',use_gpu=False)
         
     elif pred_class == "Citizenship":
-        st.write("Processing Citizenship document...")
         results = citizenship_model(img_bgr)
         ocr = easyocr.Reader(["ne"],gpu=True)
     elif pred_class == "Passport":
-        st.write("Processing Passport document...")
         results = passport_model(img_bgr)
         ocr = PaddleOCR(use_angle_cls=True, lang='en',use_gpu=False)
         

@@ -22,9 +22,9 @@
             "passport_number": "78"
         }
     },
-    "1234": {
+    "64017800590": {
         "Citizenship": {
-            "name": "Priti",
+            "name": "Priti Paudel Jaisi",
             "year_of_birth": "1995-12-07",
             "gender": "Female",
             "birth_place": "Nepalgunj",
@@ -59,6 +59,15 @@
             "contact_number": "9876543232",
             "citizenship_number": "12345",
             "license_number": "54"
+        }
+    },
+    "27017800341":{
+        "Citizenship":{
+            "name" : "अजित कोइराला",
+            "year_of_birth" : "2061",
+            "gender" : "पुरुष",
+            "birth_place" : "काठमाडौं",
+            "citizenship_number": "27017800341"
         }
     }
 }

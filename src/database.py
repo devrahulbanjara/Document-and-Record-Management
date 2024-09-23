@@ -1,73 +1,52 @@
 import json
 import os
+import streamlit as st
 
-database = "database.json"
-
-def read_database():
-    if not os.path.exists(database):
-        return {}
+def load_database(file_path):
     try:
-        with open(database, "r") as f:
-            return json.load(f)
-    except json.JSONDecodeError:
-        print("Error decoding JSON from the database file. Returning empty data.")
-        return {}
-    except Exception as e:
-        print(f"Error reading database: {e}")
-        return {}
-
-def write_database(data):
-    try:
-        with open(database, "w") as f:
-            json.dump(data, f, indent=4)
-    except Exception as e:
-        print(f"Error writing to database: {e}")
-
-def update_database(citizenship_number, document_data, document_type):
-    data = read_database()
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"The file '{file_path}' does not exist.")
+        
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+        return data
     
-    if citizenship_number not in data:
-        data[citizenship_number] = {}
+    except FileNotFoundError as fnf_error:
+        print(fnf_error)
+        return None
     
-    data[citizenship_number][document_type] = document_data
+    except json.JSONDecodeError as json_error:
+        print(f"Error decoding JSON: {json_error}")
+        return None
+
+def is_similar(text, reference):
+    matches = sum(1 for t_char, r_char in zip(text, reference) if t_char == r_char)
+    return matches / max(len(reference), len(text)) > 0.8
+
+def check_citizenship_number(citizenship_number, name,database_path="database.json"):
+    database = load_database(database_path)
     
-    write_database(data)
-    print(f"Successfully inserted {document_type} into the database with citizenship number {citizenship_number}")
+    if database is None:
+        raise ValueError("Database loading failed. Exiting.")
+        st.stop()
 
-def insert_passport(name, surname, dob, citizenship_number, passport_number):
-    new_passport_details = {
-        "name": name,
-        "surname": surname,
-        "dob": dob,
-        "citizenship_number": citizenship_number,
-        "passport_number": passport_number
-    }
-    update_database(citizenship_number, new_passport_details, "Passport")
+    for stored_citizenship_number, details in database.items():
+        if is_similar(citizenship_number, stored_citizenship_number):
+            stored_name = details.get('Citizenship', {}).get('name', '')
+            if is_similar(name, stored_name):
+                return True
+    
+    return False
 
-def insert_license(name, contact_number, dob, citizenship_number, license_number):
-    new_license_details = {
-        "name": name,
-        "contact_number": contact_number,
-        "dob": dob,
-        "citizenship_number": citizenship_number,
-        "license_number": license_number
-    }
-    update_database(citizenship_number, new_license_details, "License")
-
-def insert_citizenship(name, district, dob, citizenship_number, gender):
-    new_citizenship_details = {
-        "name": name,
-        "district": district,
-        "dob": dob,
-        "citizenship_number": citizenship_number,
-        "gender": gender
-    }
-    update_database(citizenship_number, new_citizenship_details, "Citizenship")
-
-def citizenship_exists(citizenship_number):
-    data = read_database()
-    return citizenship_number in data
-
-def doc_info_exists(document_type, citizenship_number):
-    data = read_database()
-    return document_type in data.get(citizenship_number, {})
+def check_document(citizenship_number, document_number, document_type, database_path="database.json"):
+    database = load_database(database_path)
+    
+    if document_type in database.get(citizenship_number, {}):
+        document_key = document_type.lower() + "_number"
+        if is_similar(database[citizenship_number][document_type][document_key], document_number):
+            st.warning(f"The {document_type} exists in the database.")
+        else:
+            st.warning(f"{document_type} number doesn't match with the one in the database.")
+    else:
+        st.warning(f"The {document_type} under the given citizenship number doesn't exist in the database.")
+    
