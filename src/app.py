@@ -8,6 +8,7 @@ from detection import detector
 from ocrtext import perform_ocr
 from database import insert_passport, insert_license, insert_citizenship, citizenship_exists, doc_info_exists
 from filter_citizenship import filter_citizenship_details
+from filter_license import filter_license_details
 
 database_path = "database.json"
 
@@ -47,16 +48,27 @@ if uploaded_image:
 
         highest_conf_boxes, ocr , collected_texts = detector(predicted_class_label, img_bgr)
 
-        perform_ocr(highest_conf_boxes, ocr,predicted_class_label, collected_texts, img_array, img_bgr)
+        collected_texts = perform_ocr(highest_conf_boxes, ocr,predicted_class_label, collected_texts, img_array, img_bgr)
 
         st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Processed document image")
         
+        print(collected_texts)
+            
+        st.write("Predicted by model")
+        st.write(list(collected_texts.values()))
+        
         if predicted_class_label == "Citizenship":
             details = filter_citizenship_details(collected_texts)
-            print(collected_texts)
-            st.write("Predicted by model")
-            st.write(list(collected_texts.values()))
+            
             st.write()
+            
             st.write("Filtered")
-
+            st.write(list(details.values()))
+            
+        if predicted_class_label == "License":
+            details = filter_license_details(collected_texts)
+            
+            st.write()
+            
+            st.write("Filtered")
             st.write(list(details.values()))
