@@ -38,38 +38,48 @@ def filter_text(unfiltered_text):
     return filtered_text.split()
 
 def filter_citizenship_details(collected_texts):
-    male = "परष"
-    female = "महल"
-    others = "अनय"
+    male = "पुरुष"
+    female = "महिला"
+    others = "अन्य"
+
+    def is_similar(text, reference):
+        return sum(1 for char in reference if char in text) / len(reference) > 0.6
 
     extracted_texts = {}
     name_concat = ""
 
     for label, texts in collected_texts.items():
         filtered_values = []
+        gender_found = False
 
         for text in texts:
             if label == 'citizenship_number' or label == 'year':
                 filtered_value = filter_number(text)
                 if filtered_value:
                     filtered_values.append(filtered_value)
+
             elif label == 'gender':
-                if "ल" in text and "ि" in text and len(text) <= 5:
-                    continue
-                if any(char in text for char in female):
+                if gender_found:
+                    break
+                if is_similar(text, female):
                     gender = "महिला"
-                elif any(char in text for char in male):
+                    gender_found = True
+                elif is_similar(text, male):
                     gender = "पुरुष"
-                elif any(char in text for char in others):
+                    gender_found = True
+                elif is_similar(text, others):
                     gender = "अन्य"
+                    gender_found = True
                 filtered_values.append(gender)
+                break
+
             elif label == "district":
                 filtered_text = filter_text(text)
                 for word in filtered_text:
                     if "ज" in word and "ल" in word:
                         continue
                     filtered_values.append(word)
-                    
+
             elif label == "name":
                 filtered_text = filter_text(text)
                 for word in filtered_text:
