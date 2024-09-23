@@ -9,6 +9,7 @@ from ocrtext import perform_ocr
 from database import insert_passport, insert_license, insert_citizenship, citizenship_exists, doc_info_exists
 from filter_citizenship import filter_citizenship_details
 from filter_license import filter_license_details
+from filter_passport import filter_passport_details
 
 database_path = "database.json"
 
@@ -41,7 +42,6 @@ if uploaded_image:
         st.warning('Document type not supported for checking in the database.')
         st.stop()
     else:
-    # Convert image to grayscale and then back to BGR
         img_gray = cv2.cvtColor(img_array, cv2.COLOR_RGB2GRAY)
         img_bgr = cv2.cvtColor(img_gray, cv2.COLOR_GRAY2BGR)
         height, width = img_bgr.shape[:2]
@@ -67,6 +67,14 @@ if uploaded_image:
             
         if predicted_class_label == "License":
             details = filter_license_details(collected_texts)
+            
+            st.write()
+            
+            st.write("Filtered")
+            st.write(list(details.values()))
+            
+        else:
+            details = filter_passport_details(collected_texts)
             
             st.write()
             
