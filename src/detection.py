@@ -6,7 +6,7 @@ import numpy as np
 
 license_model_path = r"../trained models/License_model.pt"
 citizenship_model_path = r"../trained models/Citizenship_model.pt"
-passport_model_path = r"../trained models/withoutdocumenttype_Passport_model.pt"
+passport_model_path = r"../trained models/Passport_model.pt"
 
 license_model = YOLO(license_model_path)
 citizenship_model = YOLO(citizenship_model_path)
@@ -25,7 +25,7 @@ class_mappings = {
         1: 'district',
         2: 'gender',
         3: 'name',
-        4: 'year'
+        4: 'year_of_birth'
     },
     "Passport": {
         0: 'citizenship_number',
