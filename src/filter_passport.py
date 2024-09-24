@@ -6,7 +6,7 @@ def preprocess_text(text):
 def filter_name(name_list):
     names = set()
     name_pattern = re.compile(
-        r'(?:given\s*names?|name|full\s*name|cu)\s*[:/\s*-]*\s*([A-Za-z\'\-0-9\s]+)',
+        r'(?:given\s*names?|names|name|full\s*name|cu)\s*[:/\s*-]*\s*([A-Za-z\'\-0-9\s]+)',
         re.IGNORECASE
     )
     if name_list:

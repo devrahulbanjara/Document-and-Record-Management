@@ -53,7 +53,7 @@ def filter_citizenship_details(collected_texts):
         gender_found = False
 
         for text in texts:
-            if label == 'citizenship_number' or label == 'year':
+            if label == 'citizenship_number' or label == 'year_of_birth':
                 filtered_value = filter_number(text)
                 if filtered_value:
                     filtered_values.append(filtered_value)
@@ -88,7 +88,7 @@ def filter_citizenship_details(collected_texts):
                     filtered_values.append(word)
 
         if filtered_values:
-            if label in ['citizenship_number', 'year']:
+            if label in ['citizenship_number', 'year_of_birth']:
                 extracted_texts[label] = " ".join(filtered_values).replace(" ", "")
             else:
                 extracted_texts[label] = " ".join(filtered_values)
@@ -96,3 +96,14 @@ def filter_citizenship_details(collected_texts):
             extracted_texts[label] = ""
 
     return extracted_texts
+
+collected_texts = {
+    "citizenship_number": ['नाशप्रशनं : २७ ०१-७७-०८२८०'],
+    "district": ['जिल्ला . केलाली'],
+    "gender": ['परुष', 'लिङ्ग'],
+    "name": ['नाम थरः', 'सार्थक शर्मा'],
+    "year": ['सालः २०६०']
+}
+
+filtered_details = filter_citizenship_details(collected_texts)
+print(filtered_details)
