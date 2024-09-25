@@ -65,19 +65,19 @@ Before proceeding with installation, download the required models from the provi
 ### Setting Up
 1. Clone the repository:
     ```bash
-    git clone <repository-link>
+    git clone https://github.com/devrahulbanjara/Document-and-Record-Management
     ```
 
 2. Create a directory for the models:
     ```bash
-    mkdir trained_models
+    mkdir "trained models"
     ```
 
 3. Place the downloaded model files into the `trained_models` directory.
 
 4. Navigate to the project directory:
     ```bash
-    cd <Repo>
+    cd Document-and-Record-Management
     ```
 
 5. Install dependencies:
