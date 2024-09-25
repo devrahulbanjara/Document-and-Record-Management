@@ -34,28 +34,61 @@ The **Document and Record Management System (DRMS)** is designed to assist in ve
 
 # Usage
 ## Installation
-To begin this project, use the included `Makefile`
 
-#### Creating Virtual Environment
+### Prerequisites
+- **Python 3.10** is required for this project. We recommend using a virtual environment to ensure compatibility.
 
-This package is built using `python-3.10`. 
-We recommend creating a virtual environment and using a matching version to ensure compatibility.
+### Virtual Environment Setup
 
-#### pre-commit
+1. Create a virtual environment:
+    ```bash
+    python3 -m venv venv
+    ```
 
-`pre-commit` will automatically format and lint your code. You can install using this by using
-`make use-pre-commit`. It will take effect on your next `git commit`
+2. Activate the virtual environment:
+    - On Linux/macOS:
+        ```bash
+        source venv/bin/activate
+        ```
+    - On Windows:
+        ```bash
+        venv\Scripts\activate
+        ```
 
-#### pip-tools
+### Download Models
+Before proceeding with installation, download the required models from the provided link. You will need the following models:
+- **Classification Model**
+- **License Model**
+- **Passport Model**
+- **Citizenship Model**
 
-The method of managing dependencies in this package is using `pip-tools`. To begin, run `make use-pip-tools` to install. 
+### Setting Up
+1. Clone the repository:
+    ```bash
+    git clone <repository-link>
+    ```
 
-Then when adding a new package requirement, update the `requirements.in` file with 
-the package name. You can include a specific version if desired but it is not necessary. 
+2. Create a directory for the models:
+    ```bash
+    mkdir trained_models
+    ```
 
-To install and use the new dependency you can run `make deps-install` or equivalently `make`
+3. Place the downloaded model files into the `trained_models` directory.
 
-If you have other packages installed in the environment that are no longer needed, you can you `make deps-sync` to ensure that your current development environment matches the `requirements` files. 
+4. Navigate to the project directory:
+    ```bash
+    cd <Repo>
+    ```
+
+5. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+6. Run the application:
+    ```bash
+    streamlit run src/app.py
+    ```
 
 ## Usage Instructions
 
