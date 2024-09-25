@@ -51,6 +51,7 @@ def filter_citizenship_details(collected_texts):
     for label, texts in collected_texts.items():
         filtered_values = []
         gender_found = False
+        gender = None
 
         for text in texts:
             if label == 'citizenship_number' or label == 'year_of_birth':
@@ -70,7 +71,9 @@ def filter_citizenship_details(collected_texts):
                 elif is_similar(text, others):
                     gender = "अन्य"
                     gender_found = True
-                filtered_values.append(gender)
+                
+                if gender is not None:
+                    filtered_values.append(gender)
                 break
 
             elif label == "district":
@@ -97,6 +100,7 @@ def filter_citizenship_details(collected_texts):
 
     return extracted_texts
 
+# Sample input
 collected_texts = {
     "citizenship_number": ['नाशप्रशनं : २७ ०१-७७-०८२८०'],
     "district": ['जिल्ला . केलाली'],
