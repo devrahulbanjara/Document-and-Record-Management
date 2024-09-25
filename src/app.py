@@ -66,12 +66,12 @@ if uploaded_image:
         st.image(cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB), caption="Provided document image")
         print()
         print()
-        print("Non filtered ",end=" ")
+        print("\n Non filtered Data ",end=" ")
         print(collected_texts)
                
         if predicted_class_label == "Citizenship":
             details = filter_citizenship_details(collected_texts)
-            print("Filtered Data ",end=" ")
+            print("\n Filtered Data ",end=" ")
             print(details)
             if citizenship_number_exists(details["citizenship_number"]):
                 if name_matches(details["name"]) and date_matches(details["year_of_birth"], details["citizenship_number"], "Citizenship"):
@@ -80,16 +80,16 @@ if uploaded_image:
                     st.warning("Citizenship number exists but the details do not match.")
             else:
                 st.warning("The given citizenship number doesn't exist.")
-                print("Extracted citizenship number doesn't match with the one in the json.")
+                print("\n Extracted citizenship number doesn't match with the one in the json.")
 
         if predicted_class_label == "License":
             details = filter_license_details(collected_texts)
-            print("Filtered Data ",end=" ")
+            print("\n Filtered Data ",end=" ")
             print(details)
             validate_document(details, "License", "license_number")
     
         elif predicted_class_label == "Passport":
             details = filter_passport_details(collected_texts)
-            print("Filtered Data ",end=" ")
+            print("\n Filtered Data ",end=" ")
             print(details)
             validate_document(details, "Passport", "passport_number")

@@ -31,11 +31,14 @@ def citizenship_number_exists(citizenship_number, database_path="database.json")
 
     for stored_citizenship_number in database.keys():
         if is_similar(citizenship_number, stored_citizenship_number):
-            print("Citizenship details in database: ",end=" ")
-            print(database[citizenship_number]["Citizenship"])
-            return True
-            
-    return False
+            if "Citizenship" in database[stored_citizenship_number]:
+                print("Citizenship details in database: ", end=" ")
+                print(database[stored_citizenship_number]["Citizenship"])
+                return True
+            else:
+                print(f"\n Key 'Citizenship' not found for {stored_citizenship_number}")
+                return False
+
 
 def name_matches(name, database_path="database.json"):
     database = load_database(database_path)
