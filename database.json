@@ -1,141 +1,66 @@
 {
-  "64017800590": {
+  "citizenship_number_1": {
     "Citizenship": {
-      "name": "प्रिती पौडेल जैसी",
-      "year_of_birth": "2060",
-      "gender": "महिला",
-      "birth_place": "सूर्खेत",
-      "citizenship_number": "64017800590"
+      "name": "NAME_CITIZEN_1",
+      "year_of_birth": "YEAR_OF_BIRTH_1",
+      "gender": "GENDER_1",
+      "birth_place": "BIRTH_PLACE_1",
+      "citizenship_number": "citizenship_number_1"
     }
   },
-  "20017901589": {
+  "citizenship_number_2": {
     "Citizenship": {
-      "name": "निकिता दाहाल",
-      "year_of_birth": "2061",
-      "gender": "महिला",
-      "birth_place": "सिन्धुली",
-      "citizenship_number": "20017901589"
-    }
-  },
-  "27017800341": {
-    "Citizenship": {
-      "name": "अजित कोइराला",
-      "year_of_birth": "2061",
-      "gender": "पुरुष",
-      "birth_place": "काठमाडौं",
-      "citizenship_number": "27017800341"
+      "name": "NAME_CITIZEN_2",
+      "year_of_birth": "YEAR_OF_BIRTH_2",
+      "gender": "GENDER_2",
+      "birth_place": "BIRTH_PLACE_2",
+      "citizenship_number": "citizenship_number_2"
     },
     "Passport": {
-      "name": "Ajit",
-      "surname": "Koirala",
-      "dob": "19-06-2004",
-      "citizenship_number": "27017800341",
-      "passport_number": "12267273"
+      "name": "PASSPORT_NAME_2",
+      "surname": "PASSPORT_SURNAME_2",
+      "dob": "DOB_2",
+      "citizenship_number": "citizenship_number_2",
+      "passport_number": "PASSPORT_NUMBER_2"
     }
   },
-  "839": {
+  "citizenship_number_3": {
     "Citizenship": {
-      "name": "नन्द प्रसाद बन्जारा",
-      "year_of_birth": "2008",
-      "gender": "पुरुष",
-      "birth_place": "सल्यान्कोट",
-      "citizenship_number": "839"
+      "name": "NAME_CITIZEN_3",
+      "year_of_birth": "YEAR_OF_BIRTH_3",
+      "gender": "GENDER_3",
+      "birth_place": "BIRTH_PLACE_3",
+      "citizenship_number": "citizenship_number_3"
+    },
+    "License": {
+      "name": "LICENSE_NAME_3",
+      "dob": "DOB_LICENSE_3",
+      "contact_number": "CONTACT_NUMBER_3",
+      "license_number": "LICENSE_NUMBER_3",
+      "citizenship_number": "citizenship_number_3"
+    }
+  },
+  "citizenship_number_4": {
+    "Citizenship": {
+      "name": "NAME_CITIZEN_4",
+      "year_of_birth": "YEAR_OF_BIRTH_4",
+      "gender": "GENDER_4",
+      "birth_place": "BIRTH_PLACE_4",
+      "citizenship_number": "citizenship_number_4"
     },
     "Passport": {
-      "name": "Nanda Prasad",
-      "surname": "Banjara",
-      "dob": "15-06-1951",
-      "citizenship_number": "839",
-      "passport_number": "12538388"
-    }
-  },
-  "05017910800": {
-    "Citizenship": {
-      "name": "सुभम राज जोशी",
-      "year_of_birth": "2061",
-      "gender": "पुरुष",
-      "birth_place": "मोरङ्ग",
-      "citizenship_number": "05017910800"
-    }
-  },
-  "05017804201": {
-    "Citizenship": {
-      "name": "सदिवस अधिकरी",
-      "year_of_birth": "2061",
-      "gender": "पुरुष",
-      "birth_place": "मोरङ्ग",
-      "citizenship_number": "05017804201"
-    }
-  },
-  "25017902738": {
-    "Citizenship": {
-      "name": "आयुश न्यौपाने",
-      "year_of_birth": "2063",
-      "gender": "पुरुष",
-      "birth_place": "नुवाकोट",
-      "citizenship_number": "25017902738"
-    }
-  },
-  "27017907814": {
-    "Citizenship": {
-      "name": "इशान न्यौपाने",
-      "year_of_birth": "2061",
-      "gender": "पुरुष",
-      "birth_place": "नुवाकोट",
-      "citizenship_number": "27017907814"
-    }
-  },
-  "5017894201": {
-    "Citizenship": {
-      "name": "दिवस अधिकारी",
-      "year_of_birth": "2061",
-      "gender": "पुरुष",
-      "birth_place": "मोरङ्ग",
-      "citizenship_number": "5017894201"
-    }
-  },
-  "04017200485": {
-    "Citizenship": {
-      "name": "सुस्मिता मल्ल",
-      "year_of_birth": "2054",
-      "gender": "महिला",
-      "birth_place": "झापा",
-      "citizenship_number": "04017200485"
-    }
-  },
-  "16018006897": {
-    "Citizenship": {
-      "name": "योगेश चौधरी",
-      "year_of_birth": "2062",
-      "gender": "पुरुष",
-      "birth_place": "सप्तरी",
-      "citizenship_number": "16018006897"
-    }
-  },
-  "19027803456": {
-    "License": {
-      "name": "SITAL MAINALI",
-      "dob": "03-03-2005",
-      "contact_number": "9845441732",
-      "license_number": "01296347",
-      "citizenship_number": "19027803456"
-    }
-    
-  },
-  "27017708280": {
-    "Citizenship": {
-      "name": "सार्थक शर्मा",
-      "year_of_birth": "2060",
-      "gender": "पुरुष",
-      "birth_place": "कैलाली",
-      "citizenship_number": "27017708280"
+      "name": "PASSPORT_NAME_4",
+      "surname": "PASSPORT_SURNAME_4",
+      "dob": "DOB_4",
+      "citizenship_number": "citizenship_number_4",
+      "passport_number": "PASSPORT_NUMBER_4"
     },
     "License": {
-      "name": "SARTHAK SHARMA",
-      "dob": "10-03-2004",
-      "contact_number": "9860688334",
-      "license_number": "030601031255",
-      "citizenship_number": "27017708280"
+      "name": "LICENSE_NAME_4",
+      "dob": "DOB_LICENSE_4",
+      "contact_number": "CONTACT_NUMBER_4",
+      "license_number": "LICENSE_NUMBER_4",
+      "citizenship_number": "citizenship_number_4"
     }
   }
 }
