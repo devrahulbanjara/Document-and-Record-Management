@@ -3,7 +3,9 @@ import os
 import streamlit as st
 import Levenshtein
 
-def load_database(file_path):
+DATABASE_PATH = "../database.json"
+
+def load_database(file_path=DATABASE_PATH):
     try:
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"The file '{file_path}' does not exist.")
@@ -24,8 +26,8 @@ def is_similar(text, reference, threshold=0.8):
     similarity = 1 - (Levenshtein.distance(text, reference) / max(len(reference), len(text)))
     return similarity > threshold
 
-def citizenship_number_exists(citizenship_number, database_path="database.json"):
-    database = load_database(database_path)
+def citizenship_number_exists(citizenship_number):
+    database = load_database()
 
     if database is None:
         raise ValueError("Database loading failed. Exiting.")
@@ -43,8 +45,8 @@ def citizenship_number_exists(citizenship_number, database_path="database.json")
 def normalize_name(name):
     return ' '.join(sorted(name.lower().split()))
 
-def name_matches(name, database_path="database.json", threshold=0.7):
-    database = load_database(database_path)
+def name_matches(name, threshold=0.7):
+    database = load_database()
 
     if database is None:
         raise ValueError("Database loading failed. Exiting.")
@@ -60,26 +62,26 @@ def name_matches(name, database_path="database.json", threshold=0.7):
     
     return False
 
-def document_key_exists(citizenship_number, document_number, document_type, database_path="database.json"):
-    database = load_database(database_path)
+def document_key_exists(citizenship_number, document_number, document_type):
+    database = load_database()
     
     if document_type in database.get(citizenship_number, {}):
-        print(f"{document_type} details in database: ",end=" ")
+        print(f"{document_type} details in database: ", end=" ")
         print(database[citizenship_number][document_type])
         return True
     else:
         return False
     
-def date_matches(extracted_date, extracted_citizenship_number, document_type, database_path="database.json"):
-    database = load_database(database_path)
+def date_matches(extracted_date, extracted_citizenship_number, document_type):
+    database = load_database()
 
     if (document_type == "Passport" or document_type == "License"):
         return extracted_date.split('-')[-1] == database[extracted_citizenship_number][document_type]["dob"].split('-')[-1]
     elif document_type == "Citizenship":
         return extracted_date == database[extracted_citizenship_number][document_type]["year_of_birth"]
    
-def doc_number_matches(extracted_doc_number, citizenship_number, document_type, database_path="database.json"):
-    database = load_database(database_path)
+def doc_number_matches(extracted_doc_number, citizenship_number, document_type):
+    database = load_database()
     key = document_type.lower() + "_number"
     if is_similar(extracted_doc_number, database[citizenship_number][document_type][key]):
         return True

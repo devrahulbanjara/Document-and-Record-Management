@@ -77,7 +77,7 @@ def filter_passport_details(collected_texts):
                 filtered_value = filter_number(text)
                 filtered_values.append(filtered_value)
         if filtered_values:
-            if label in ['citizenship_number', 'contact_number', "license_number"]:
+            if label in ['citizenship_number', "license_number"]:
                 extracted_texts[label] = " ".join(filtered_values).replace(" ", "")
             else:
                 extracted_texts[label] = " ".join(filtered_values)

@@ -1,4 +1,4 @@
-import streamlit as st  # For displaying messages in Streamlit app
+import streamlit as st
 from database import citizenship_number_exists, document_key_exists, doc_number_matches, date_matches
 
 def validate_document(details, document_type, document_number_key):
