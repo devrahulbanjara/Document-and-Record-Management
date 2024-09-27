@@ -2,12 +2,11 @@ import cv2
 import streamlit as st
 
 def perform_ocr(highest_conf_boxes, ocr, predicted_class_label, collected_texts, img_array, img_bgr):
-    height, width = img_bgr.shape[:2]  # Get image dimensions
+    height, width = img_bgr.shape[:2]
 
-    # Dynamically scale font size and thickness based on image dimensions
-    scale_factor = min(width, height) / 1000.0  # Adjust this value to control scaling sensitivity
-    font_scale = 0.55 * scale_factor  # Scale the font size
-    font_thickness = int(0.8 * scale_factor)  # Scale the font thickness
+    scale_factor = min(width, height) / 1000.0
+    font_scale = 0.55 * scale_factor 
+    font_thickness = int(0.8 * scale_factor)
 
     for label, (box, confidence) in highest_conf_boxes.items():
         x1, y1, x2, y2 = box
@@ -39,8 +38,7 @@ def perform_ocr(highest_conf_boxes, ocr, predicted_class_label, collected_texts,
 
         color = (255, 0, 0)
 
-        # Draw bounding box and text with dynamically scaled values
-        cv2.rectangle(img_bgr, (x1, y1), (x2, y2), color, max(1, font_thickness))  # Bounding box thickness
+        cv2.rectangle(img_bgr, (x1, y1), (x2, y2), color, max(1, font_thickness))
         cv2.putText(img_bgr, label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, font_scale, color, font_thickness)
     
     return collected_texts
