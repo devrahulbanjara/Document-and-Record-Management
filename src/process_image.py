@@ -13,6 +13,7 @@ from validate_document import validate_document
 from validate_citizenship import validate_citizenship
 from image_orientation import correct_image_orientation
 from plot_details import draw_citizenship_details, draw_license_details, draw_passport_details
+from database import person_info
 
 def process_image(uploaded_image):
     img = correct_image_orientation(uploaded_image)
@@ -51,21 +52,27 @@ def process_image(uploaded_image):
         details = filter_citizenship_details(collected_texts)
         print("\nFiltered Data ", details)
 
-        validate_citizenship(details)
-        draw_citizenship_details(draw, details, nepali_font)
+        is_genuine = validate_citizenship(details)
+        if is_genuine:
+            details = person_info(details["citizenship_number"],"Citizenship")
+        draw_citizenship_details(draw, details, nepali_font,is_genuine)
 
     elif predicted_class_label == "License":
         details = filter_license_details(collected_texts)
         print("\nFiltered Data ", details)
-
-        validate_document(details, "License", "license_number")
+        
+        is_genuine = validate_document(details, "License", "license_number")
+        if is_genuine:
+            details = person_info(details["citizenship_number"],"License")
         draw_license_details(draw, details, default_font)
 
     elif predicted_class_label == "Passport":
         details = filter_passport_details(collected_texts)
         print("\nFiltered Data ", details)
 
-        validate_document(details, "Passport", "passport_number")
+        is_genuine = validate_document(details, "Passport", "passport_number")
+        if is_genuine:
+            details = person_info(details["citizenship_number"],"Passport")
         draw_passport_details(draw, details, default_font)
 
     blank_image_np = np.array(blank_image_pil)

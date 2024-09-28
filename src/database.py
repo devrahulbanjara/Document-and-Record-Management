@@ -86,3 +86,7 @@ def doc_number_matches(extracted_doc_number, citizenship_number, document_type):
     if is_similar(extracted_doc_number, database[citizenship_number][document_type][key]):
         return True
     return False
+
+def person_info(citizenship_number,document_type):
+    database=load_database()
+    return database[citizenship_number][document_type]

@@ -1,8 +1,9 @@
 from PIL import ImageDraw, ImageFont
 
-def draw_citizenship_details(draw, details, font):
+def draw_citizenship_details(draw, details, font,is_genuine):
+    key = "birth_place" if is_genuine else "district"
     draw.text((10, 20), f"नाम       : {details['name']}", font=font, fill=(0, 0, 0))
-    draw.text((10, 60), f"जन्मस्थान    : {details.get('district', 'Unknown')}", font=font, fill=(0, 0, 0))
+    draw.text((10, 60), f"जन्मस्थान    : {details.get(key, 'Unknown')}", font=font, fill=(0, 0, 0))
     draw.text((10, 100), f"जन्म साल   : {details.get('year_of_birth', 'Unknown')}", font=font, fill=(0, 0, 0))
     draw.text((10, 140), f"लिङ्ग       : {details.get('gender', 'Unknown')}", font=font, fill=(0, 0, 0))
     draw.text((10, 180), f"नागरिकता नम्बर: {details.get('citizenship_number', 'Unknown')}", font=font, fill=(0, 0, 0))

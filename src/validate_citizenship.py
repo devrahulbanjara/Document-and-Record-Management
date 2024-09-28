@@ -3,10 +3,13 @@ from database import citizenship_number_exists, date_matches, name_matches
 
 def validate_citizenship(details):
     stored_citizenship_number, number_exists = citizenship_number_exists(details["citizenship_number"])
+    is_genuine = False
     if number_exists:
         if date_matches(details["year_of_birth"], stored_citizenship_number, "Citizenship"):
             if name_matches(details["name"]):
                 st.warning("✅ Genuine citizenship.")
+                is_genuine = True
+                return is_genuine
             else:
                 st.error("❌ Citizenship number exists, but the name doesn't match.")
         else:

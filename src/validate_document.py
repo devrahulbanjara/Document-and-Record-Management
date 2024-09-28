@@ -3,12 +3,15 @@ from database import citizenship_number_exists, document_key_exists, doc_number_
 
 def validate_document(details, document_type, document_number_key):
     stored_citizenship_number, number_exists = citizenship_number_exists(details["citizenship_number"])
-
+    
+    is_genuine = False
     if number_exists:
         if document_key_exists(stored_citizenship_number, details[document_number_key], document_type):
             if doc_number_matches(details[document_number_key], stored_citizenship_number, document_type):
                 if date_matches(details["dob"], stored_citizenship_number, document_type):
                     st.warning(f"✅ Genuine {document_type}")
+                    is_genuine = True
+                    return is_genuine
                 else:
                     st.error(f"❌ The extracted {document_type} DOB doesn't match with the {document_type} DOB in the JSON.")
             else:
