@@ -1,6 +1,11 @@
 # Document and Record Management System
 
 ## Introduction
+<div align="center">
+
+![Animate](docs/animate.gif)
+
+</div>
 The **Document and Record Management System (DRMS)** is designed to assist in verifying the authenticity of documents against a government database. This system is intended to help organizations detect fraudulent documents by checking if the provided document details match records stored in government portals. By facilitating a reliable way to cross-verify documents, the system aims to prevent fraud and enhance security in document handling.
 ## Goals
 - **Automated Document Processing**: Utilize computer vision and OCR to automatically classify and extract data from uploaded government documents.
