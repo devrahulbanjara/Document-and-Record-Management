@@ -7,12 +7,12 @@ def validate_citizenship(details):
     if number_exists:
         if date_matches(details["year_of_birth"], stored_citizenship_number, "Citizenship"):
             if name_matches(details["name"]):
-                st.warning("✅ Genuine citizenship.")
                 is_genuine = True
+                details["citizenship_number"] = stored_citizenship_number
                 return is_genuine
             else:
-                st.error("❌ Citizenship number exists, but the name doesn't match.")
+                return "❌ Citizenship number exists, but the name doesn't match."
         else:
-            st.error("❌ Citizenship number exists, but the date doesn't match.")
+            return "❌ Citizenship number exists, but the date doesn't match."
     else:
-        st.error("❌ The given citizenship number doesn't exist.")
+        return "❌ The given citizenship number doesn't exist."
