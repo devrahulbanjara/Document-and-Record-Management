@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/19273f69-bc75-435a-9041-6f355b229816)# Document and Record Management System
+# Document and Record Management System
 
 ## Introduction
 <div align="center">
