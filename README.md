@@ -113,7 +113,49 @@ Before proceeding with installation, download the required models from the provi
 Processed documents and verification results are stored in directories specified in the project configuration. The dummy database is maintained in JSON files within the project directory.
 
 # Results
-## Metrics 
-The system is yet to be evaluated
-## Evaluation Results
-The system is yet to be evaluated
+
+## Classification Model Evaluation
+- **Model Accuracy**: 0.98
+
+| Metric    | Citizenship | License | Passport | Others | Weighted Average |
+|-----------|-------------|---------|----------|--------|------------------|
+| Precision | 0.98        | 0.95    | 1.00     | 0.98   | 0.98             |
+| Recall    | 0.98        | 0.98    | 0.96     | 0.98   | 0.98             |
+| F1 Score  | 0.98        | 0.96    | 0.98     | 0.98   | 0.98             |
+
+## YOLOv8 Models Evaluation
+
+### Citizenship Model
+| Metric  | Cit. No. | District | Gender | Name  | Year  | Overall |
+|---------|----------|----------|--------|-------|-------|---------|
+| Precision | 0.949  | 0.931    | 0.956  | 0.971 | 0.944 | 0.949   |
+| Recall    | 0.941  | 0.965    | 0.968  | 1.000 | 0.872 | 0.941   |
+| mAP@50    | 0.970  | 0.978    | 0.974  | 0.995 | 0.951 | 0.970   |
+| mAP@50-95 | 0.577  | 0.622    | 0.556  | 0.555 | 0.610 | 0.577   |
+
+### License Model
+| Metric   | Cit. No. | Con. No. | DOB    | Lic. No. | Name  | Overall |
+|----------|----------|----------|--------|----------|-------|---------|
+| Precision| 0.798    | 0.615    | 0.773  | 0.905    | 0.955 | 0.809   |
+| Recall   | 0.923    | 0.917    | 0.910  | 0.947    | 0.954 | 0.930   |
+| mAP@50   | 0.892    | 0.892    | 0.888  | 0.949    | 0.945 | 0.913   |
+| mAP@50-95| 0.506    | 0.546    | 0.551  | 0.573    | 0.448 | 0.533   |
+
+### Passport Model
+| Metric  | Cit. No. | DOB    | Name  | Pas. No. | Surname | Overall |
+|---------|----------|--------|-------|----------|---------|---------|
+| Precision| 0.994   | 0.982  | 0.982 | 0.938    | 0.992   | 0.978   |
+| Recall   | 0.978   | 0.977  | 0.989 | 0.979    | 0.989   | 0.983   |
+| mAP@50   | 0.979   | 0.986  | 0.994 | 0.989    | 0.995   | 0.989   |
+| mAP@50-95| 0.738   | 0.778  | 0.772 | 0.669    | 0.760   | 0.743   |
+
+## Overall System Evaluation
+
+| Metric    | Genuine (g) | Fraudulent (f) |
+|-----------|-------------|----------------|
+| Precision | 1.0         | 0.6            |
+| Recall    | 0.7647      | 1.0            |
+| F1 Score  | 0.8667      | 0.75           |
+
+- **Overall Accuracy**: 82.61%
+
