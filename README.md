@@ -1,4 +1,4 @@
-# Document and Record Management System
+![image](https://github.com/user-attachments/assets/19273f69-bc75-435a-9041-6f355b229816)# Document and Record Management System
 
 ## Introduction
 <div align="center">
@@ -33,9 +33,10 @@ The **Document and Record Management System (DRMS)** is designed to assist in ve
 
 ### High-Level Next Steps
 1. **Multi-Language Support**: Implement support for multiple languages in the OCR and text extraction processes to accommodate diverse user needs and enhance usability across different regions.
-2. **Improve Data Quality**: Increase the quality and quantity of training data by incorporating a larger set of original and high-quality documents. This will enhance the accuracy and robustness of OCR and classification models.
-3. **Develop Production-Grade Software**: Refactor the system to meet production-grade standards, including improving code quality, documentation, testing, and reliability. Implement best practices for software development to ensure robustness and maintainability.
-4. **Integrate Relational Databases**: Replace the current dummy JSON database with a relational database system (e.g., PostgreSQL, MySQL) to better manage and query large volumes of data. This will improve data integrity, scalability, and performance.
+2. **Custom OCR Fine-Tuning**: Fine-tune the OCR model with custom datasets for improved accuracy on specific document types.
+3. **Improve Data Quality**: Increase the quality and quantity of training data by incorporating a larger set of original and high-quality documents. This will enhance the accuracy and robustness of OCR and classification models.
+4. **Develop Production-Grade Software**: Refactor the system to meet production-grade standards, including improving code quality, documentation, testing, and reliability. Implement best practices for software development to ensure robustness and maintainability.
+5. **Integrate Relational Databases**: Replace the current dummy JSON database with a relational database system (e.g., PostgreSQL, MySQL) to better manage and query large volumes of data. This will improve data integrity, scalability, and performance.
 
 
 # Usage
