@@ -32,9 +32,10 @@ The **Document and Record Management System (DRMS)** is designed to assist in ve
 - **Scalability Limitations**: The system's performance may degrade with high volumes of simultaneous uploads or very high-resolution images.
 
 ### High-Level Next Steps
-1. **Improve Data Quality**: Increase the quality and quantity of training data by incorporating a larger set of original and high-quality documents. This will enhance the accuracy and robustness of OCR and classification models.
-2. **Develop Production-Grade Software**: Refactor the system to meet production-grade standards, including improving code quality, documentation, testing, and reliability. Implement best practices for software development to ensure robustness and maintainability.
-3. **Integrate Relational Databases**: Replace the current dummy JSON database with a relational database system (e.g., PostgreSQL, MySQL) to better manage and query large volumes of data. This will improve data integrity, scalability, and performance.
+1. **Multi-Language Support**: Implement support for multiple languages in the OCR and text extraction processes to accommodate diverse user needs and enhance usability across different regions.
+2. **Improve Data Quality**: Increase the quality and quantity of training data by incorporating a larger set of original and high-quality documents. This will enhance the accuracy and robustness of OCR and classification models.
+3. **Develop Production-Grade Software**: Refactor the system to meet production-grade standards, including improving code quality, documentation, testing, and reliability. Implement best practices for software development to ensure robustness and maintainability.
+4. **Integrate Relational Databases**: Replace the current dummy JSON database with a relational database system (e.g., PostgreSQL, MySQL) to better manage and query large volumes of data. This will improve data integrity, scalability, and performance.
 
 
 # Usage
