@@ -25,16 +25,12 @@ def perform_ocr(highest_conf_boxes, ocr, predicted_class_label, collected_texts,
                 for detection in ocr_result:
                     text = detection[1]
                     collected_texts[label].append(text)
-            else:
-                st.write("NO text")
         else:
             ocr_result = ocr.ocr(cropped_img, cls=True)
             
             if ocr_result and len(ocr_result) > 0 and ocr_result[0]:
                 text_detected = " ".join([word_info[1][0] for word_info in ocr_result[0] if word_info[1]])
                 collected_texts[label].append(text_detected.strip()) 
-            else:
-                st.write("NO text")
 
         color = (255, 0, 0)
 
