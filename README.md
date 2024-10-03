@@ -155,7 +155,7 @@ Before proceeding with installation, download the required models from the provi
   - Classification model training and inference (`notebooks/Classification/`)
   - YOLOv8 model training and inference (`notebooks/YOLOv8/`)
   - OCR experiments using EasyOCR (`notebooks/OCR/`)
-  - Text filtering experiments after OCR output
+  - Text filtering experiments after OCR output (`notebooks/Text Filtering/`)
 
 ### Tests
 
