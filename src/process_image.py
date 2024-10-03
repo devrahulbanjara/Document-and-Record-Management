@@ -88,7 +88,7 @@ def process_image(uploaded_image):
             plot_passport(details)
 
     if success_message:
-        st.markdown(f"<h2 style='text-align: center; color: #4B0082;'>{success_message}</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='text-align: center; color: green;'>{success_message}</h3>", unsafe_allow_html=True)
     elif error_message:
         st.error(error_message)
         st.markdown(f"<h3 style='text-align: center; color: #DC3545;'>❌ Fraudulent {predicted_class_label}</h3>", unsafe_allow_html=True)

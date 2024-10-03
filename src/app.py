@@ -1,7 +1,7 @@
 import streamlit as st
 from process_image import process_image
 
-st.set_page_config(page_title="Document and Recprd Management", page_icon="📝", layout="wide")
+st.set_page_config(page_title="Document and Record Management", page_icon="📝", layout="wide")
 
 st.markdown(
     """
