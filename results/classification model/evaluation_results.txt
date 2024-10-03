@@ -1,0 +1,7 @@
+Model Accuracy: 0.98
+Classification Report:
+citizenship: Precision: 0.98, Recall: 0.98, F1 Score: 0.98
+license: Precision: 0.95, Recall: 0.98, F1 Score: 0.96
+passport: Precision: 1.00, Recall: 0.96, F1 Score: 0.98
+others: Precision: 0.98, Recall: 0.98, F1 Score: 0.98
+Weighted Average: Precision: 0.98, Recall: 0.98, F1 Score: 0.98
